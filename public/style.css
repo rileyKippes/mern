@@ -1,0 +1,26 @@
+* {
+ 	background-color:#202020;
+	color:#AAAAAA;
+}
+
+table,tr,td,th {
+	border: solid 1px;
+	border-collapse: collapse;
+}
+
+h1, h3 {
+	text-align:center;
+}
+
+#navbar {
+	position: fixed;
+	margin: 0px;
+	display: block;
+	top:0;
+	left:0;
+	height: 20px;
+	width: 100%;
+	border-bottom: solid 1px;
+	background-color: #000;
+	min-width: auto;
+}
