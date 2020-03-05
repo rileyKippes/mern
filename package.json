@@ -4,7 +4,7 @@
   "description": "MERN Stack, read the ReadMe",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test",
     "build": "rm public/*.js; npx babel --watch src --out-dir ./public --presets react-app/prod"
   },
   "keywords": [
@@ -19,6 +19,7 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
+    "chai": "^4.2.0",
     "express": "^4.17.1",
     "mongo": "^0.1.0",
     "passport": "^0.4.1",

@@ -32,8 +32,20 @@ static getHTMLTemplate(template,data){
 }
 
 static getHTMLTemplate(template){
-	return fs.readFileSync('./views/'+template);
+	return ""+fs.readFileSync('./views/'+template);
 }
+
+static getPrettyTime(){
+	var d = new Date();
+	var date = d.getFullYear()+'-';
+	date += d.getMonth().toString().padStart(2,'0')+'-';
+	date += d.getDate().toString().padStart(2,'0');
+	var time = d.getHours().toString().padStart(2,'0')+':';
+	time += d.getMinutes().toString().padStart(2,'0')+':';
+	time += d.getSeconds().toString().padStart(2,'0');
+	return date + ' ' + time;
+}
+
 }
 
 module.exports = utils;
