@@ -10,10 +10,10 @@ File Structure
 
 ~ contains the base files. readme, server.js
 
-public contains public files like .css files and client-side .js files
+/public contains public files like .css files and client-side .js files
 
-routes contains individual pages
+/routes contains individual pages
 
-src contains .jsx source code, to be compiled with babel
+/src contains .jsx source code, to be compiled with babel
 
-views contains html templates
+/views contains html templates

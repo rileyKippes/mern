@@ -3,19 +3,36 @@
 class NavBarClass extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLoggedIn: false };
+    this.state = { loginBtnClicked:false,
+					isLoggedIn: false };
   }
 
   render() {
-    if (this.state.isLoggedIn) {
+	if (this.state.isLoggedIn) {
+		return( 
+			<a> Welcome User! </a>
+		);
+	}
+    if (this.state.loginBtnClicked) {
       return (
-		<div id="navbar">
-			Welcome, Master Wayne
-		</div>);
+		<form id="login_box" action="/login" method="post">
+			<p> Please use a terrible login </p>
+			<p> I am one man, and I am NOT touting myself a security expert. </p>
+			<div>
+				<label>Username:</label> 
+				<input id="username" type="text" name="username"/>
+			</div>
+			<div>			
+				<label>Password:</label>
+				<input id="password" type="password" name="password"/>
+			</div>
+			<input type="submit" value="Log In"/>
+		</form>
+		);
     }
 
-    return (
-      <button onClick={() => this.setState({ isLoggedIn: true }) }>
+    return (                  
+      <button onClick={() => this.setState({ loginBtnClicked: true }) }>
         Login
       </button>
     );

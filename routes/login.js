@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var utils = require('./utils');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+
 
 //login
-router.get('login',function (req,res) {
+router.get('/login',function (req,res) {
 	var html = '';
 	html += '<html>';
 	html += utils.getHTMLHead(req,res);
@@ -14,9 +13,9 @@ router.get('login',function (req,res) {
 	res.send(html);
 });
 
-router.post('login',function (req,res) {
+router.post('/login',function (req,res) {
 	passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login',
+                                   failureRedirect: '/',
                                    failureFlash: true })
 });
 

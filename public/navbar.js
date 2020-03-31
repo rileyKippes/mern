@@ -9,41 +9,79 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var NavBarClass = function (_React$Component) {
-  _inherits(NavBarClass, _React$Component);
+	_inherits(NavBarClass, _React$Component);
 
-  function NavBarClass(props) {
-    _classCallCheck(this, NavBarClass);
+	function NavBarClass(props) {
+		_classCallCheck(this, NavBarClass);
 
-    var _this = _possibleConstructorReturn(this, (NavBarClass.__proto__ || Object.getPrototypeOf(NavBarClass)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (NavBarClass.__proto__ || Object.getPrototypeOf(NavBarClass)).call(this, props));
 
-    _this.state = { isLoggedIn: false };
-    return _this;
-  }
+		_this.state = { loginBtnClicked: false,
+			isLoggedIn: false };
+		return _this;
+	}
 
-  _createClass(NavBarClass, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
+	_createClass(NavBarClass, [{
+		key: "render",
+		value: function render() {
+			var _this2 = this;
 
-      if (this.state.isLoggedIn) {
-        return React.createElement(
-          'div',
-          { id: 'navbar' },
-          'Welcome, Master Wayne'
-        );
-      }
+			if (this.state.isLoggedIn) {
+				return React.createElement(
+					"a",
+					null,
+					" Welcome User! "
+				);
+			}
+			if (this.state.loginBtnClicked) {
+				return React.createElement(
+					"form",
+					{ id: "login_box", action: "/login", method: "post" },
+					React.createElement(
+						"p",
+						null,
+						" Please use a terrible login "
+					),
+					React.createElement(
+						"p",
+						null,
+						" I am one man, and I am NOT touting myself a security expert. "
+					),
+					React.createElement(
+						"div",
+						null,
+						React.createElement(
+							"label",
+							null,
+							"Username:"
+						),
+						React.createElement("input", { id: "username", type: "text", name: "username" })
+					),
+					React.createElement(
+						"div",
+						null,
+						React.createElement(
+							"label",
+							null,
+							"Password:"
+						),
+						React.createElement("input", { id: "password", type: "password", name: "password" })
+					),
+					React.createElement("input", { type: "submit", value: "Log In" })
+				);
+			}
 
-      return React.createElement(
-        'button',
-        { onClick: function onClick() {
-            return _this2.setState({ isLoggedIn: true });
-          } },
-        'Login'
-      );
-    }
-  }]);
+			return React.createElement(
+				"button",
+				{ onClick: function onClick() {
+						return _this2.setState({ loginBtnClicked: true });
+					} },
+				"Login"
+			);
+		}
+	}]);
 
-  return NavBarClass;
+	return NavBarClass;
 }(React.Component);
 
 var navbarDiv = document.querySelector('#navbar');

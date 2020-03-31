@@ -1,10 +1,25 @@
 var express = require('express');
 var app = express();
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+		console.log("User is finding one");
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (!user.verifyPassword(password)) { return done(null, false); }
+      return done(null, user);
+    });
+  }
+));
+
 
 var index = require('./routes/index');
 var api = require('./routes/api');
 var fnf = require('./routes/fnf'); //File Not Found page
-//var login = require('./routes/login');
+var user = require('./routes/user/user');
 
 var port = 8080;
 
@@ -29,8 +44,13 @@ app.use(function(req, res, next) {
 	next();
 });
 
+/*app.use('/',function(req,res,next) {
+	console.log("/ was called for");
+	next();
+});*/
 app.use('/',index);
 app.use('/api',api);
+app.use('/u',user);
 //app.use('/login',login);
 app.use(express.static('public'));
 app.use('*',fnf);

@@ -24,10 +24,8 @@ router.get('/',function (req,res) {
 	var html = '';
 	html += '<html>';
 	html += utils.getHTMLHead(req,res);
-	var data;
 	
-	html += utils.getHTMLTemplate('index.html',data);
-	//console.log(html);*/
+	html += utils.getHTMLTemplate('index.html');
 	res.send(html);
 });
 
