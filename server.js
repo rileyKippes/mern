@@ -3,6 +3,8 @@ var app = express();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+var utils = require('./routes/utils');
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
@@ -40,7 +42,7 @@ function getPrettyTime(){
 
 //log every request to server
 app.use(function(req, res, next) {
-	console.log(getPrettyTime()+' @ '+ req.originalUrl);
+	console.log(utils.getPrettyTime()+' @ '+ req.originalUrl);
 	next();
 });
 

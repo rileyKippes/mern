@@ -25,7 +25,7 @@ h1, h3 {
 	min-width: auto;
 }
 
-#login_box{
+.vert_list{
 	position: fixed;
 	padding: 5px;
 	top: 50%;
@@ -38,7 +38,7 @@ h1, h3 {
 	flex-direction: column;
 }
 
-#login_box * {
+.vert_list * {
 	padding: 2px;
 	background-color: #000;
 	text-align: center;

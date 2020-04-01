@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var utils = require('utils');
+var utils = require('../utils');
 
-var register = require('/users/register');
+var register = require('./register');
 
 router.get('/',function (req,res) {
 	var html = '';
@@ -12,3 +12,7 @@ router.get('/',function (req,res) {
 	//console.log(html);*/
 	res.send(html);
 });
+
+router.get('/register',register);
+
+module.exports = router;

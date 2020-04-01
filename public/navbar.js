@@ -36,7 +36,7 @@ var NavBarClass = function (_React$Component) {
 			if (this.state.loginBtnClicked) {
 				return React.createElement(
 					"form",
-					{ id: "login_box", action: "/login", method: "post" },
+					{ id: "login_box", "class": "vert_list", action: "/login", method: "post" },
 					React.createElement(
 						"p",
 						null,

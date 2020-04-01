@@ -7,7 +7,7 @@ static getHTMLHead()
 	html += '<title> Index </title>\n';
 	html+= '<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>\n';
 	html+= '<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>\n';
-	html+= '<link rel="stylesheet" type="text/css" href="style.css">';	
+	html+= '<link rel="stylesheet" type="text/css" href="/style.css">';	
 	html += '</head>\n';
 	return html
 }

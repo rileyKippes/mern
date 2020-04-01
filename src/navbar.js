@@ -15,7 +15,7 @@ class NavBarClass extends React.Component {
 	}
     if (this.state.loginBtnClicked) {
       return (
-		<form id="login_box" action="/login" method="post">
+		<form id="login_box" class="vert_list" action="/login" method="post">
 			<p> Please use a terrible login </p>
 			<p> I am one man, and I am NOT touting myself a security expert. </p>
 			<div>

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var utils = require('./utils');
+var utils = require('../utils');
 
 // ~/u/register
 router.get('/register',function (req,res) {
