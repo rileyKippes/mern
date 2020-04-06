@@ -27,22 +27,12 @@ var port = 8080;
 
 function listen(){
 	console.log(' Now Listening at http://localhost:8080/ \n');
-}
-
-function getPrettyTime(){
-	var d = new Date();
-	var date = d.getFullYear()+'-';
-	date += d.getMonth().toString().padStart(2,'0')+'-';
-	date += d.getDate().toString().padStart(2,'0');
-	var time = d.getHours().toString().padStart(2,'0')+':';
-	time += d.getMinutes().toString().padStart(2,'0')+':';
-	time += d.getSeconds().toString().padStart(2,'0');
-	return date + ' ' + time;
+	console.log('|    Date    |   Time   | Method | Route ');
 }
 
 //log every request to server
 app.use(function(req, res, next) {
-	console.log(utils.getPrettyTime()+' @ '+ req.originalUrl);
+	utils.getPrettyLog(req);
 	next();
 });
 

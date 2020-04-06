@@ -13,6 +13,6 @@ router.get('/',function (req,res) {
 	res.send(html);
 });
 
-router.get('/register',register);
+router.all('/register',register);
 
 module.exports = router;

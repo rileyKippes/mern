@@ -36,20 +36,20 @@ var NavBarClass = function (_React$Component) {
 			if (this.state.loginBtnClicked) {
 				return React.createElement(
 					"form",
-					{ id: "login_box", "class": "vert_list", action: "/login", method: "post" },
+					{ id: "login_box", className: "vert_list", action: "/login", method: "post" },
 					React.createElement(
 						"p",
-						null,
+						{ className: "list_item" },
 						" Please use a terrible login "
 					),
 					React.createElement(
 						"p",
-						null,
+						{ className: "list_item" },
 						" I am one man, and I am NOT touting myself a security expert. "
 					),
 					React.createElement(
 						"div",
-						null,
+						{ className: "list_item" },
 						React.createElement(
 							"label",
 							null,
@@ -59,7 +59,7 @@ var NavBarClass = function (_React$Component) {
 					),
 					React.createElement(
 						"div",
-						null,
+						{ className: "list_item" },
 						React.createElement(
 							"label",
 							null,
@@ -67,16 +67,27 @@ var NavBarClass = function (_React$Component) {
 						),
 						React.createElement("input", { id: "password", type: "password", name: "password" })
 					),
-					React.createElement("input", { type: "submit", value: "Log In" })
+					React.createElement("input", { className: "list_item",
+						type: "submit",
+						value: "Log In" })
 				);
 			}
 
 			return React.createElement(
-				"button",
-				{ onClick: function onClick() {
-						return _this2.setState({ loginBtnClicked: true });
-					} },
-				"Login"
+				"div",
+				null,
+				React.createElement(
+					"button",
+					{ onClick: function onClick() {
+							return _this2.setState({ loginBtnClicked: true });
+						} },
+					"Login"
+				),
+				React.createElement(
+					"a",
+					{ href: "/u/" },
+					" User page "
+				)
 			);
 		}
 	}]);
