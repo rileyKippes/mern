@@ -8,19 +8,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LoginUser = function (_React$Component) {
-	_inherits(LoginUser, _React$Component);
+var DeleteUser = function (_React$Component) {
+	_inherits(DeleteUser, _React$Component);
 
-	function LoginUser(props) {
-		_classCallCheck(this, LoginUser);
+	function DeleteUser(props) {
+		_classCallCheck(this, DeleteUser);
 
-		var _this = _possibleConstructorReturn(this, (LoginUser.__proto__ || Object.getPrototypeOf(LoginUser)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (DeleteUser.__proto__ || Object.getPrototypeOf(DeleteUser)).call(this, props));
 
 		_this.state = {};
 		return _this;
 	}
 
-	_createClass(LoginUser, [{
+	_createClass(DeleteUser, [{
 		key: "render",
 		value: function render() {
 			return React.createElement(
@@ -29,7 +29,7 @@ var LoginUser = function (_React$Component) {
 				React.createElement(
 					"h3",
 					null,
-					" Please use a terrible login, anything should work! "
+					" Are you sure you want to delete the account? "
 				),
 				React.createElement(
 					"label",
@@ -43,13 +43,19 @@ var LoginUser = function (_React$Component) {
 					"Password:"
 				),
 				React.createElement("input", { "class": "login", id: "password", type: "password", name: "password" }),
-				React.createElement("input", { type: "submit", value: "Log In" })
+				React.createElement(
+					"label",
+					null,
+					"Type \"Delete\" to Confirm"
+				),
+				React.createElement("input", { "class": "login", id: "confirm", type: "text", name: "confirm", placeholder: "Delete" }),
+				React.createElement("input", { "class": "login", type: "submit", value: "Delete Account" })
 			);
 		}
 	}]);
 
-	return LoginUser;
+	return DeleteUser;
 }(React.Component);
 
-var logUser = document.querySelector('#loginUserContainer');
-ReactDOM.render(React.createElement(LoginUser, null), logUser);
+var delUser = document.querySelector('#deleteUserContainer');
+ReactDOM.render(React.createElement(DeleteUser, null), delUser);

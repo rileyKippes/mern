@@ -3,6 +3,8 @@ var router = express.Router();
 var utils = require('../utils');
 
 var register = require('./register');
+var login = require('./login');
+var deleteU = require('./delete');
 
 router.get('/',function (req,res) {
 	var html = '';
@@ -14,5 +16,7 @@ router.get('/',function (req,res) {
 });
 
 router.all('/register',register);
+router.all('/login',login);
+router.all('/delete',deleteU);
 
 module.exports = router;
