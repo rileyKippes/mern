@@ -7,12 +7,12 @@ class LoginUser extends React.Component {
   }
 	render(){
 		return(
-		<form id="login_box" class="vert_list" action="login" method="post">
+		<form id="login_box" className="vert_list" action="login" method="post">
 			<h3> Please use a terrible login, anything should work! </h3>
 			<label>Username:</label>
-			<input class="login" id="username" type="text" name="username"/>
+			<input className="login" id="username" type="text" name="username"/>
 			<label>Password:</label>
-			<input class="login" id="password" type="password" name="password"/>
+			<input className="login" id="password" type="password" name="password"/>
 			<input type="submit" value="Log In"/>
 		</form>
 		);

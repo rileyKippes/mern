@@ -7,15 +7,15 @@ class DeleteUser extends React.Component {
   }
 	render(){
 		return(
-		<form id="login_box" class="vert_list" action="login" method="post">
+		<form id="login_box" className="vert_list" action="login" method="post">
 			<h3> Are you sure you want to delete the account? </h3>
 			<label>Username:</label>
-			<input class="login" id="username" type="text" name="username"/>
+			<input className="login" id="username" type="text" name="username"/>
 			<label>Password:</label>
-			<input class="login" id="password" type="password" name="password"/>
+			<input className="login" id="password" type="password" name="password"/>
 			<label>Type "Delete" to Confirm</label>
-			<input class="login" id="confirm" type="text" name="confirm" placeholder="Delete"/>
-			<input class="login" type="submit" value="Delete Account"/>
+			<input className="login" id="confirm" type="text" name="confirm" placeholder="Delete"/>
+			<input className="login" type="submit" value="Delete Account"/>
 		</form>
 		);
 	}

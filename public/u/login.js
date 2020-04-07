@@ -25,7 +25,7 @@ var LoginUser = function (_React$Component) {
 		value: function render() {
 			return React.createElement(
 				"form",
-				{ id: "login_box", "class": "vert_list", action: "login", method: "post" },
+				{ id: "login_box", className: "vert_list", action: "login", method: "post" },
 				React.createElement(
 					"h3",
 					null,
@@ -36,13 +36,13 @@ var LoginUser = function (_React$Component) {
 					null,
 					"Username:"
 				),
-				React.createElement("input", { "class": "login", id: "username", type: "text", name: "username" }),
+				React.createElement("input", { className: "login", id: "username", type: "text", name: "username" }),
 				React.createElement(
 					"label",
 					null,
 					"Password:"
 				),
-				React.createElement("input", { "class": "login", id: "password", type: "password", name: "password" }),
+				React.createElement("input", { className: "login", id: "password", type: "password", name: "password" }),
 				React.createElement("input", { type: "submit", value: "Log In" })
 			);
 		}

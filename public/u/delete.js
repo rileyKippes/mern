@@ -25,7 +25,7 @@ var DeleteUser = function (_React$Component) {
 		value: function render() {
 			return React.createElement(
 				"form",
-				{ id: "login_box", "class": "vert_list", action: "login", method: "post" },
+				{ id: "login_box", className: "vert_list", action: "login", method: "post" },
 				React.createElement(
 					"h3",
 					null,
@@ -36,20 +36,20 @@ var DeleteUser = function (_React$Component) {
 					null,
 					"Username:"
 				),
-				React.createElement("input", { "class": "login", id: "username", type: "text", name: "username" }),
+				React.createElement("input", { className: "login", id: "username", type: "text", name: "username" }),
 				React.createElement(
 					"label",
 					null,
 					"Password:"
 				),
-				React.createElement("input", { "class": "login", id: "password", type: "password", name: "password" }),
+				React.createElement("input", { className: "login", id: "password", type: "password", name: "password" }),
 				React.createElement(
 					"label",
 					null,
 					"Type \"Delete\" to Confirm"
 				),
-				React.createElement("input", { "class": "login", id: "confirm", type: "text", name: "confirm", placeholder: "Delete" }),
-				React.createElement("input", { "class": "login", type: "submit", value: "Delete Account" })
+				React.createElement("input", { className: "login", id: "confirm", type: "text", name: "confirm", placeholder: "Delete" }),
+				React.createElement("input", { className: "login", type: "submit", value: "Delete Account" })
 			);
 		}
 	}]);
