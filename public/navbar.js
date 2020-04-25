@@ -9,90 +9,38 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var NavBarClass = function (_React$Component) {
-	_inherits(NavBarClass, _React$Component);
+  _inherits(NavBarClass, _React$Component);
 
-	function NavBarClass(props) {
-		_classCallCheck(this, NavBarClass);
+  function NavBarClass(props) {
+    _classCallCheck(this, NavBarClass);
 
-		var _this = _possibleConstructorReturn(this, (NavBarClass.__proto__ || Object.getPrototypeOf(NavBarClass)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (NavBarClass.__proto__ || Object.getPrototypeOf(NavBarClass)).call(this, props));
 
-		_this.state = { loginBtnClicked: false,
-			isLoggedIn: false };
-		return _this;
-	}
+    _this.state = {
+      isLoggedIn: false };
+    return _this;
+  }
 
-	_createClass(NavBarClass, [{
-		key: "render",
-		value: function render() {
-			var _this2 = this;
+  _createClass(NavBarClass, [{
+    key: 'render',
+    value: function render() {
+      if (this.state.isLoggedIn) {
+        return React.createElement(
+          'a',
+          null,
+          ' Welcome User! '
+        );
+      }
 
-			if (this.state.isLoggedIn) {
-				return React.createElement(
-					"a",
-					null,
-					" Welcome User! "
-				);
-			}
-			if (this.state.loginBtnClicked) {
-				return React.createElement(
-					"form",
-					{ id: "login_box", className: "vert_list", action: "/login", method: "post" },
-					React.createElement(
-						"p",
-						{ className: "list_item" },
-						" Please use a terrible login "
-					),
-					React.createElement(
-						"p",
-						{ className: "list_item" },
-						" I am one man, and I am NOT touting myself a security expert. "
-					),
-					React.createElement(
-						"div",
-						{ className: "list_item" },
-						React.createElement(
-							"label",
-							null,
-							"Username:"
-						),
-						React.createElement("input", { id: "username", type: "text", name: "username" })
-					),
-					React.createElement(
-						"div",
-						{ className: "list_item" },
-						React.createElement(
-							"label",
-							null,
-							"Password:"
-						),
-						React.createElement("input", { id: "password", type: "password", name: "password" })
-					),
-					React.createElement("input", { className: "list_item",
-						type: "submit",
-						value: "Log In" })
-				);
-			}
+      return React.createElement(
+        'a',
+        { href: '/u/' },
+        ' User page '
+      );
+    }
+  }]);
 
-			return React.createElement(
-				"div",
-				null,
-				React.createElement(
-					"button",
-					{ onClick: function onClick() {
-							return _this2.setState({ loginBtnClicked: true });
-						} },
-					"Login"
-				),
-				React.createElement(
-					"a",
-					{ href: "/u/" },
-					" User page "
-				)
-			);
-		}
-	}]);
-
-	return NavBarClass;
+  return NavBarClass;
 }(React.Component);
 
 var navbarDiv = document.querySelector('#navbar');
