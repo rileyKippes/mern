@@ -67,3 +67,37 @@ label {
 	top: 10%;
 	border: solid 1px;
 }
+
+/** Chat CSS **/
+
+#chat_div {
+	
+	width: 75%;
+	min-width:250px;
+}
+
+#post_chat_btn {
+	width: 5%;
+	max-width: 30px;
+	min-width: 17px;
+}
+
+#comment_input {
+	width: 95%;
+}
+
+#chat_box {
+	max-height:750px;
+}
+
+#chat_box, #chat_box > * {
+	color: black;
+	background-color: white;
+}
+
+.comment {
+	border-collapse: collapse;
+	border-bottom: solid 1px;
+	border-left: solid 3px;
+	margin: 0;
+}

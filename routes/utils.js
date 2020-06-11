@@ -43,7 +43,7 @@ static getPrettyTime(){
 	var time = d.getHours().toString().padStart(2,'0')+':';
 	time += d.getMinutes().toString().padStart(2,'0')+':';
 	time += d.getSeconds().toString().padStart(2,'0');
-	return '| '+date + ' | ' + time;
+	return ' '+date + ' | ' + time;
 }
 
 static getPrettyRequest(req){

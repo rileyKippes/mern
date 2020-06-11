@@ -20,14 +20,15 @@ passport.use(new LocalStrategy(
 
 var index = require('./routes/index');
 var api = require('./routes/api');
-var fnf = require('./routes/fnf'); //File Not Found page
+var portfolio = require('./routes/portfolio/portfolio');
 var user = require('./routes/user/user');
+var file_not_found = require('./routes/file_not_found'); 
 
 var port = 8080;
 
 function listen(){
 	console.log(' Now Listening at http://localhost:8080/ \n');
-	console.log('|    Date    |   Time   | Method | Route ');
+	console.log('    Date    |   Time   | Method | Route ');
 }
 
 //log every request to server
@@ -36,15 +37,17 @@ app.use(function(req, res, next) {
 	next();
 });
 
-/*app.use('/',function(req,res,next) {
-	console.log("/ was called for");
+app.post(function(req, res, next) {
+	console.log(req.params);
 	next();
-});*/
+});
+
 app.use('/',index);
 app.use('/api',api);
 app.use('/u',user);
+app.use('/p',portfolio);
 //app.use('/login',login);
 app.use(express.static('public'));
-app.use('*',fnf);
+app.use('*',file_not_found);
 
 app.listen(port,listen);

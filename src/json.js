@@ -12,6 +12,7 @@ class JSON extends React.Component {
 		console.log(this.state);
 		fetch('/api')
 		  .then((response) => {
+			console.log("about to return");
 			return response.json();
 		  })
 		  .then((myJson) => {
