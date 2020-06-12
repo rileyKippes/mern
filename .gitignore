@@ -1,0 +1,2 @@
+#ignore compiled React files
+/public/*js
