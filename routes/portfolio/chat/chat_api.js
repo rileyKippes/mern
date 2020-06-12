@@ -36,7 +36,7 @@ const postDocuments = function(db, req, res) {
 	var currUTC = Date.now();
   const collection = db.collection(collName);
 	var newComment = "failed to post comment#"+i;
-	if(req.body.comment){
+	if(req.body != undefined){
 		newComment = req.body.comment
 	}
 	console.log("Cookie:"+JSON.stringify(req.cookies));

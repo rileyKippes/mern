@@ -3,6 +3,12 @@ var app = express();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+var cookie = require('cookie-parser');
+var mult = require('multer');
+var multer = mult();
+
+
+
 var utils = require('./routes/utils');
 
 passport.use(new LocalStrategy(
@@ -41,6 +47,9 @@ app.post(function(req, res, next) {
 	console.log(req.params);
 	next();
 });
+
+app.use(multer.array()); 
+app.use(cookie());
 
 app.use('/',index);
 app.use('/api',api);

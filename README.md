@@ -6,7 +6,7 @@ To Run, run "npm start"
 
 MongoDB, Express, ReactJS, NodeJS
 
-File Structure
+~~ File Structure ~~
 
 ~ contains the base files. readme, server.js
 
@@ -17,3 +17,4 @@ File Structure
 /src contains .jsx source code, to be compiled with babel
 
 /views contains html templates
+
