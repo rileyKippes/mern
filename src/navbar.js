@@ -18,6 +18,7 @@ class NavBarClass extends React.Component {
 		<div>
 	  	<a href="/u/"> User page </a>
 		<a href="/p"> Portfolio </a>
+		<a href="/"> Home </a>
 		</div>
     );
   }

@@ -9,6 +9,9 @@ static getHTMLHead()
 	html+= '<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>\n';
 	html+= '<link rel="stylesheet" type="text/css" href="/style.css">';	
 	html += '</head>\n';
+	html += '<body>\n';
+	html += '<div id="navbar"> Navbar </div>\n';
+	html += '<script src="/navbar.js"></script>\n';
 	return html
 }
 
