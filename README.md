@@ -18,3 +18,4 @@ MongoDB, Express, ReactJS, NodeJS
 
 /views contains html templates
 
+/static contains static files, namely style.css
