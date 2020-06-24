@@ -8,7 +8,8 @@ static getHTMLHead()
 	html += '<title> Index </title>\n';
 	html+= '<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>\n';
 	html+= '<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>\n';
-	html+= '<link rel="stylesheet" type="text/css" href="/style.css">';	
+	html+= '<link rel="stylesheet" type="text/css" href="/style.css">\n';	
+	html+= '<link rel="icon" href="/logo.svg">\n';	
 	html += '</head>\n';
 	html += '<body>\n';
 	html += '<div id="navbar"> Navbar </div>\n';
@@ -17,6 +18,7 @@ static getHTMLHead()
 	html += '<div id="main_div">\n';
 	return html
 }
+
 //deprecated
 /*static getHTMLTemplate(template,data){
 	console.log("getHTMLTemplate("+template+","+data+");");
