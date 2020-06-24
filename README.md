@@ -10,7 +10,7 @@ MongoDB, Express, ReactJS, NodeJS
 
 ~ contains the base files. readme, server.js
 
-/public contains public files like .css files and client-side .js files
+/public contains public files like client-side .js files
 
 /routes contains individual pages
 
