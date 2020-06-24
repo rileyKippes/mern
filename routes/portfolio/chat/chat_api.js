@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb').MongoClient;
 const assert = require('assert');
+var utils = require('../../utils');
 
 const url = 'mongodb://localhost:27017';
 const dbname = 'chat';
@@ -30,25 +31,27 @@ router.get('/',function (req,res) {
 });
 
 const postDocuments = function(db, req, res) {
-  // Get the documents collection
-	//if failed, note it.
-	var d=new Date();
-	var currUTC = Date.now();
-  const collection = db.collection(collName);
-	var newComment = "failed to post comment#"+i;
-	if(req.body != undefined){
-		newComment = req.body.comment
-	}
-	console.log("Cookie:"+JSON.stringify(req.cookies));
-  // Insert a comment.
-  collection.insertOne({
-				comment:newComment,
-				utc:currUTC,
-				cookie:req.cookies.color
-				}).then(() => {
-	i++;
-	res.sendStatus(200);
-  });
+	  // Get the documents collection
+		//if failed, note it.
+		var d=new Date();
+		var currUTC = Date.now();
+	  	const collection = db.collection(collName);
+		var newComment = "failed to post comment#"+i;
+		if(req.body != undefined){
+			newComment = req.body.comment
+		}
+		else{
+			utils.debug("Cookie:"+JSON.stringify(req.cookies));
+		}
+	  // Insert a comment.
+	  collection.insertOne({
+					comment:newComment,
+					utc:currUTC,
+					cookie:req.cookies.color
+					}).then(() => {
+		i++;
+		res.sendStatus(200);
+	  });
 }
 
 router.post('/',function (req,res) {
@@ -58,7 +61,7 @@ router.post('/',function (req,res) {
 		var db =  client.db(dbname);
 		postDocuments(db, req, res);
 	});
-	
+
 });
 
 module.exports = router;

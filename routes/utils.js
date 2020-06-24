@@ -1,6 +1,7 @@
 var fs = require('fs');
-
+var config;
 class utils{
+
 static getHTMLHead()
 {
 	var html = '<head>\n';
@@ -12,10 +13,12 @@ static getHTMLHead()
 	html += '<body>\n';
 	html += '<div id="navbar"> Navbar </div>\n';
 	html += '<script src="/navbar.js"></script>\n';
+	html += '<div id="main_div_container">\n';
+	html += '<div id="main_div">\n';
 	return html
 }
-
-static getHTMLTemplate(template,data){
+//deprecated
+/*static getHTMLTemplate(template,data){
 	console.log("getHTMLTemplate("+template+","+data+");");
 	var html = '';
 	function makeTable(data){
@@ -32,10 +35,21 @@ static getHTMLTemplate(template,data){
 	console.log(data);
 	//html += makeTable(data);
 	return html;
-}
-
+} */
+//deprecated
+/*
 static getHTMLTemplate(template){
 	return ""+fs.readFileSync('./views/'+template);
+}*/
+
+static getBetterHTMLTemplate(template){
+	var html = this.getHTMLHead();
+	html += fs.readFileSync('./views/'+template);
+	html += "</div>";
+	html += "</div>";
+	html += "</body>";
+	html += "</html>";
+	return html;
 }
 
 static getPrettyTime(){
@@ -49,6 +63,12 @@ static getPrettyTime(){
 	return ' '+date + ' | ' + time;
 }
 
+static listen(){
+	console.log(' Now Listening at http://localhost:8080/ \n');
+	console.log('    Date    |   Time   | Method | Route ');
+}
+
+
 static getPrettyRequest(req){
 	var output = "";
 	var method = req.method.toString().padEnd(4,' ');
@@ -56,8 +76,27 @@ static getPrettyRequest(req){
 	return output;
 }
 
+static debug(message){
+	if(config.debug){
+		console.log(message);
+	}
+}
+
 static getPrettyLog(req){
 	console.log(this.getPrettyTime() + ' ' + this.getPrettyRequest(req));
+}
+
+static loadConfig(){
+	console.log("Loading Config File");
+	config = ""+fs.readFileSync('./config.json');
+	config = JSON.parse(config);
+	console.log(config);
+	console.log("Config file loaded");
+	return config;
+}
+
+static getConfig(){
+	return config;
 }
 
 }

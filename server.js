@@ -7,9 +7,9 @@ var cookie = require('cookie-parser');
 var mult = require('multer');
 var multer = mult();
 
-
-
 var utils = require('./routes/utils');
+
+var config;
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -31,11 +31,7 @@ var user = require('./routes/user/user');
 var file_not_found = require('./routes/file_not_found'); 
 
 var port = 8080;
-
-function listen(){
-	console.log(' Now Listening at http://localhost:8080/ \n');
-	console.log('    Date    |   Time   | Method | Route ');
-}
+var config = utils.loadConfig();
 
 //log every request to server
 app.use(function(req, res, next) {
@@ -53,10 +49,12 @@ app.use(cookie());
 
 app.use('/',index);
 app.use('/api',api);
-app.use('/u',user);
 app.use('/p',portfolio);
-//app.use('/login',login);
+if(config.login){
+	app.use('/u',user);
+} //login is still in progress.
 app.use(express.static('public'));
+app.use(express.static('static'));
 app.use('*',file_not_found);
 
-app.listen(port,listen);
+app.listen(port,utils.listen);

@@ -9,14 +9,10 @@ var LocalStrategy = require('passport-local').Strategy;
 var chat_api = require('./chat_api');
 
 router.get('/',function (req,res) {
-	var html = '';
-	html += '<html>';
-	html += utils.getHTMLHead(req,res);
-	
-	html += utils.getHTMLTemplate('chat.html');
-	res.send(html);
+	res.send(utils.getBetterHTMLTemplate('chat.html'));
 });
 
 router.use('/api',chat_api);
 }
+
 module.exports = router;
