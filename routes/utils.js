@@ -96,11 +96,10 @@ static getPrettyLog(req){
 }
 
 static loadConfig(){
-	console.log("Loading Config File");
 	config = ""+fs.readFileSync('./config.json');
 	config = JSON.parse(config);
-	console.log(config);
-	console.log("Config file loaded");
+	this.debug(config);
+	this.debug("Config file loaded");
 	return config;
 }
 
