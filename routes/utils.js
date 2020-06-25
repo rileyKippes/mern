@@ -4,7 +4,8 @@ class utils{
 
 static getHTMLHead()
 {
-	var html = '<head>\n';
+	var html = '<html>\n'
+	html += '<head>\n';
 	html += '<title> Index </title>\n';
 	html+= '<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>\n';
 	html+= '<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>\n';
@@ -19,33 +20,39 @@ static getHTMLHead()
 	return html
 }
 
-//deprecated
-/*static getHTMLTemplate(template,data){
-	console.log("getHTMLTemplate("+template+","+data+");");
-	var html = '';
-	function makeTable(data){
-		var html = '<table>';
-		function tableRow(car){
-			html+='<tr><td>'+car.make+'</td><td>'+car.model+'</td></tr>';
-			console.log(car);
-		}
-		data.forEach(tableRow);
-		html += '</table>';
-		return html;
+static getCustomHTMLHead(data){
+	var html = '<html>\n'
+	html += '<head>\n';
+	if(data.title === undefined){
+		html += "<title> Riley Kippes' website </title>\n";
 	}
-	html += fs.readFileSync('./views/'+template);
-	console.log(data);
-	//html += makeTable(data);
-	return html;
-} */
-//deprecated
-/*
-static getHTMLTemplate(template){
-	return ""+fs.readFileSync('./views/'+template);
-}*/
+	else{
+		html += '<title> '+data.title+' </title>\n';
+	}
+	if(data.style != undefined){
+		html += html+= '<link rel="stylesheet" type="text/css" href="'+data.style+'">\n';
+	}
+	html+= '<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>\n';
+	html+= '<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>\n';
+	html+= '<link rel="stylesheet" type="text/css" href="/style.css">\n';	
+	html+= '<link rel="icon" href="/logo.svg">\n';	
+	html += '</head>\n';
+	html += '<body>\n';
+	html += '<div id="navbar"> Navbar </div>\n';
+	html += '<script src="/navbar.js"></script>\n';
+	html += '<div id="main_div_container">\n';
+	html += '<div id="main_div">\n';
+	return html
+}
 
-static getBetterHTMLTemplate(template){
-	var html = this.getHTMLHead();
+static getBetterHTMLTemplate(template, data){
+	if(data === undefined){
+		this.debug("Route still exists without custom title. Template requested was "+template);
+		var html = this.getHTMLHead();
+	}
+	else{
+		var html = this.getCustomHTMLHead(data);
+	}
 	html += fs.readFileSync('./views/'+template);
 	html += "</div>";
 	html += "</div>";
