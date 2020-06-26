@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "node test",
-    "build": "rm public/*.js; npx babel src --out-dir ./public --presets react-app/prod"
+    "build": "npm run clean; npx babel src --out-dir ./public --presets react-app/prod",
+	"clean": "find ./public -name \"*.js\" -type f -delete"
   },
   "keywords": [
     "MERN",
