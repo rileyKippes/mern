@@ -77,7 +77,6 @@ passport.deserializeUser(function(_id, done) {
 });
 
 passport.use(new localStrategy(function(username,password,done) {
-	console.log('Passport local strategy function running');
 	var client = new mongo(mURL,{ useUnifiedTopology: true });
 	client.connect(function(err) {
 		var db =  client.db(dbName);
