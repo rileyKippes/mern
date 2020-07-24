@@ -1,25 +1,21 @@
+'use strict'
+{
 var express = require('express');
 var router = express.Router();
 var utils = require('../utils');
 
+var register_api = require('./register_api');
+
 // ~/u/register
-router.get('/register',function (req,res) {
-	//console.log("Register Get");
-	var html = '';
-	html += '<html>';
-	html += utils.getHTMLHead(req,res);
-	html += utils.getHTMLTemplate('register.html');
-	//console.log(html);*/
-	res.status(200).send(html);
+router.get('/',function (req,res) {
+	res.send(utils.getBetterHTMLTemplate('user/register.html',{title:"Register User"}));
 });
 
 //when a user tries to sign up, they send a post request
-router.post('/register',function (req,res) {
-	var html = '';
-	html += '<html>';
-	html += utils.getHTMLHead(req,res);
-	html += utils.getHTMLTemplate('register_success.html');
-	res.send(html);
+router.post('/',function (req,res) {
+	//res.send(utils.getBetterHTMLTemplate('register_success.html',{title:"Registration successful"}));
 });
 
+router.use('/api',register_api);
+}
 module.exports = router;

@@ -1,22 +1,28 @@
 var express = require('express');
 var router = express.Router();
+var ensureLoggedIn = require('connect-ensure-login');
 var utils = require('../utils');
 
 var register = require('./register');
 var login = require('./login');
 var deleteU = require('./delete');
+var profile = require('./profile');
 
 router.get('/',function (req,res) {
-	var html = '';
-	html += '<html>';
-	html += utils.getHTMLHead(req,res);
-	html += utils.getHTMLTemplate('user.html');
-	//console.log(html);*/
-	res.send(html);
+	res.send(utils.getBetterHTMLTemplate('user/user.html',{title:"Account Management"}));
 });
 
-router.all('/register',register);
-router.all('/login',login);
-router.all('/delete',deleteU);
+router.use('/register',register);
+router.use('/login',login);
+router.use('/delete',
+	ensureLoggedIn.ensureLoggedIn('/u/login'),
+	deleteU);
+router.use('/profile',
+	ensureLoggedIn.ensureLoggedIn('/u/login'),
+	profile);
+router.use('/logout',function(req, res){
+  req.logout();
+  res.redirect('/u');
+});
 
 module.exports = router;

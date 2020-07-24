@@ -1,5 +1,8 @@
 MERN Stack Webserver by Riley Harlan Kippes
 
+Features include being able to register, log in, log out, and view your personal account.
+You can also chat on the chat box
+
 To Build, run "npm run build"
 
 To Run, run "npm start"
@@ -26,7 +29,7 @@ MongoDB, Express, ReactJS, NodeJS
 
 -- Future features ideas to be implemented --
 
-A user account system. I've already laid in the ground work with passport, just need to do the rest.
+Add the ability to modify and delete accounts. 
 
 Attach the Chatbox to user accounts. I've already started with it using cookies to determine comment color.
 
