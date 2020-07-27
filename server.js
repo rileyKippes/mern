@@ -23,9 +23,6 @@ var file_not_found = require('./routes/file_not_found');
 var port = 8080;
 var config = utils.loadConfig();
 
-
-
-
 app.use(multer.array()); 
 app.use(cookie());
 app.use(body);
