@@ -15,6 +15,8 @@ router.get('/',function (req,res) {
 		const collection = db.collection(collName);
 		collection.find().sort({utc:-1}).toArray().then((docs) => {
 		res.status(200).json(docs);
+	}).catch((err) => {
+		console.log(err);
 	})
 	}).catch((err) => {
 		console.log(err);
@@ -22,6 +24,9 @@ router.get('/',function (req,res) {
 	
 });
 
+//uses the logged in user's color now
+//it used to use a variable that was isolated to the script
+//but now it's integrated!
 router.post('/',function (req,res) {
 	var client = new mongo(url,{ useUnifiedTopology: true });
 	client.connect().then(() => {
@@ -41,7 +46,7 @@ router.post('/',function (req,res) {
 		collection.insertOne({
 						comment:newComment,
 						utc:currUTC,
-						cookie:req.cookies.color
+						cookie:req.user.color
 	})
 	}).then(() => {
 		res.sendStatus(200);

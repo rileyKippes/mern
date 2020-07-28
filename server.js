@@ -113,9 +113,7 @@ app.post(function(req, res, next) {
 app.use('/',index);
 app.use('/api',api);
 app.use('/p',portfolio);
-if(config.login){
-	app.use('/u',user);
-} //login is still in progress.
+app.use('/u',user);
 app.use(express.static('public'));
 app.use(express.static('static'));
 app.use('*',file_not_found);

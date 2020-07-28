@@ -31,8 +31,6 @@ MongoDB, Express, ReactJS, NodeJS
 
 Add the ability to modify and delete accounts. 
 
-Attach the Chatbox to user accounts. I've already started with it using cookies to determine comment color.
-
 Maybe some sort of blog posting system, a bit like twitter. 
 
 Possibly some sort of small game, like Breakout or Pong. I would also implement a leaderboard for it, and attach it to the user accounts
