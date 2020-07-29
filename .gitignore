@@ -1,3 +1,5 @@
 #ignore compiled React files
 /public/*
+
 /node_modules/*
+access.log

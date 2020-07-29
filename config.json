@@ -1,5 +1,11 @@
 {
+	"console_log":"dev",
+	"file_log":"common",
 	"port":8080,
 	"debug": true,
-	"login": true
+	"login": true,
+	"mongo":{
+		"url":"mongodb://localhost:27017",
+		"db":"mydb"
+	}
 }

@@ -88,7 +88,7 @@ static loadConfig(){
 	config = ""+fs.readFileSync('./config.json');
 	config = JSON.parse(config);
 	this.debug("Config file loaded");
-	this.debug(config);
+	this.debug(JSON.stringify(config,null,2));
 	return config;
 }
 

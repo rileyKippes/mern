@@ -10,6 +10,7 @@ var mult = require('multer');
 var multer = mult();
 var session = require('express-session');
 var morgan = require('morgan');
+var fs = require('fs');
 
 var utils = require('./routes/utils');
 
@@ -22,7 +23,12 @@ var file_not_found = require('./routes/file_not_found');
 var config = utils.loadConfig();
 var port = config.port;
 
-app.use(morgan('tiny'));
+//logging
+var accessLogStream = fs.createWriteStream('./access.log');
+app.use(morgan(config.console_log));
+app.use(morgan(config.file_log, { stream: accessLogStream }));
+
+
 app.use(multer.array()); 
 app.use(cookie());
 app.use(body);
@@ -41,8 +47,8 @@ app.use(
 
 var mongo = require('mongodb').MongoClient;
 
-var mURL = 'mongodb://localhost:27017';
-var dbName = 'mydb';
+var mURL = config.mongo.url;
+var dbName = config.mongo.db;
 var collName = 'users';
 
 //bcrypt
@@ -104,4 +110,14 @@ app.use(express.static('public'));
 app.use(express.static('static'));
 app.use('*',file_not_found);
 
-app.listen(port,utils.listen);
+var server = app.listen(port,utils.listen);
+
+//On shutdown
+//SIGINT is when you ctrl+c
+process.on('SIGINT', () => {
+	console.log('\nClosing server.');
+	server.close(() => {
+		console.log('Server closed.');
+		process.exit(0);
+	});
+});
