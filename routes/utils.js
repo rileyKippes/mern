@@ -17,7 +17,7 @@ static getHTMLHead()
 	html += '<script src="/navbar.js"></script>\n';
 	html += '<div id="main_div_container">\n';
 	html += '<div id="main_div">\n';
-	return html
+	return html;
 }
 
 static getCustomHTMLHead(data){
@@ -42,7 +42,7 @@ static getCustomHTMLHead(data){
 	html += '<script src="/navbar.js"></script>\n';
 	html += '<div id="main_div_container">\n';
 	html += '<div id="main_div">\n';
-	return html
+	return html;
 }
 
 static getBetterHTMLTemplate(template, data){
@@ -72,17 +72,10 @@ static getPrettyTime(){
 	return ' '+date + ' | ' + time;
 }
 
+
 static listen(){
-	console.log(' Now Listening at http://localhost:8080/ \n');
-	console.log('    Date    |   Time   | Method | Route ');
-}
+	console.log(' Now Listening at http://localhost:'+config.port);
 
-
-static getPrettyRequest(req){
-	var output = "";
-	var method = req.method.toString().padEnd(4,' ');
-	output = '|  ' + method + '  | ' + req.originalUrl;
-	return output;
 }
 
 static debug(message){
@@ -91,15 +84,11 @@ static debug(message){
 	}
 }
 
-static getPrettyLog(req){
-	console.log(this.getPrettyTime() + ' ' + this.getPrettyRequest(req));
-}
-
 static loadConfig(){
 	config = ""+fs.readFileSync('./config.json');
 	config = JSON.parse(config);
-	this.debug(config);
 	this.debug("Config file loaded");
+	this.debug(config);
 	return config;
 }
 

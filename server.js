@@ -4,13 +4,12 @@ var express = require('express');
 var app = express();
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
-
-
 var cookie = require('cookie-parser');
 var body = require('body-parser').urlencoded({ extended: true });
 var mult = require('multer');
 var multer = mult();
 var session = require('express-session');
+var morgan = require('morgan');
 
 var utils = require('./routes/utils');
 
@@ -20,9 +19,10 @@ var portfolio = require('./routes/portfolio/portfolio');
 var user = require('./routes/user/user');
 var file_not_found = require('./routes/file_not_found'); 
 
-var port = 8080;
 var config = utils.loadConfig();
+var port = config.port;
 
+app.use(morgan('tiny'));
 app.use(multer.array()); 
 app.use(cookie());
 app.use(body);
@@ -39,7 +39,6 @@ app.use(
 ** Passport stuff **
 *******************/
 
-//mongo
 var mongo = require('mongodb').MongoClient;
 
 var mURL = 'mongodb://localhost:27017';
@@ -96,19 +95,6 @@ app.use(passport.session());
 /*******************
 **  End Passport  **
 *******************/
-
-//log every request to server
-//should probably just use morgan
-app.use(function(req, res, next) {
-	utils.getPrettyLog(req);
-	next();
-});
-
-app.post(function(req, res, next) {
-	utils.debug("params:"+req.params);
-	utils.debug("body  :"+req.body);
-	next();
-});
 
 app.use('/',index);
 app.use('/api',api);

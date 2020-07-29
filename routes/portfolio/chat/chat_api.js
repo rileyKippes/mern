@@ -16,7 +16,7 @@ router.get('/',function (req,res) {
 		collection.find().sort({utc:-1}).toArray().then((docs) => {
 		res.status(200).json(docs);
 	}).catch((err) => {
-		console.log(err);
+		console.log(err); //is funky, needs to be redone.
 	})
 	}).catch((err) => {
 		console.log(err);
