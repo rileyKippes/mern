@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb').MongoClient;
 var bcrypt = require('bcrypt');
+var utils = require('../utils');
 
-var url = 'mongodb://localhost:27017';
-var dbName = 'mydb';
+const config = utils.getConfig();
+var url = config.mongo.url;
+var dbName = config.mongo.db;
 var collName = 'users';
 
 var saltRounds = 10;
@@ -17,7 +19,6 @@ function generateColor(){
 		rand = Math.floor(Math.random() * hex.length);
 		ret += hex[rand];
 	}
-	console.log('Generated color is '+ret);
 	return ret;
 }
 
@@ -36,7 +37,7 @@ router.post('/',function (req,res) {
 		//first check if there's already a user with that username
 		const collection = db.collection(collName);
 		if(collection.find({username:req.body.username}).count() > 0)
-		{  //.find() is quicker than .findOne()
+		{  
 			console.log("User already exists");
 			var user = collection.findOne({username:req.body.username});
 			console.log(JSON.stringify(user));

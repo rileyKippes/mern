@@ -1,4 +1,6 @@
 'use strict'
+var utils = require('./routes/utils');
+var config = utils.loadConfig();
 
 var express = require('express');
 var app = express();
@@ -12,15 +14,13 @@ var session = require('express-session');
 var morgan = require('morgan');
 var fs = require('fs');
 
-var utils = require('./routes/utils');
-
 var index = require('./routes/index');
 var api = require('./routes/api');
 var portfolio = require('./routes/portfolio/portfolio');
 var user = require('./routes/user/user');
 var file_not_found = require('./routes/file_not_found'); 
 
-var config = utils.loadConfig();
+
 var port = config.port;
 
 //logging
@@ -28,18 +28,10 @@ var accessLogStream = fs.createWriteStream('./access.log');
 app.use(morgan(config.console_log));
 app.use(morgan(config.file_log, { stream: accessLogStream }));
 
-
 app.use(multer.array()); 
 app.use(cookie());
 app.use(body);
-app.use(
-	session({
-		secret: 'Neuromancer is a great book', //random string, used for hash
-			//also, it really is a good book
-		resave: false,
-		saveUninitialized: false
-	})
-)
+
 
 /*******************
 ** Passport stuff **
@@ -52,6 +44,16 @@ var dbName = config.mongo.db;
 var collName = 'users';
 
 //bcrypt
+
+app.use(
+	session({
+		secret: 'Neuromancer is a great book', //random string, used for hash
+			//also, it really is a good book
+		resave: false,
+		saveUninitialized: false
+	})
+)
+
 var bcrypt = require('bcrypt');
 
 passport.serializeUser(function(user, done) {
@@ -89,7 +91,9 @@ passport.use(new localStrategy(function(username,password,done) {
 				return done(null, false, {message: 'Incorrect username or password'}) 
 			};
 			return done(null, user);
-		});
+		}).catch((err) => {
+			console.log(err);
+			done(new Error('Error: '+err)); });
 		
 		});
 	});
@@ -112,7 +116,7 @@ app.use('*',file_not_found);
 
 var server = app.listen(port,utils.listen);
 
-//On shutdown
+//On shutdown, exit with code 0
 //SIGINT is when you ctrl+c
 process.on('SIGINT', () => {
 	console.log('\nClosing server.');

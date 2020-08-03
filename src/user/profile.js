@@ -15,13 +15,28 @@ class Profile extends React.Component {
 		  });
 	}
 
+
+	randomizeColor(){
+		fetch('/u/profile/api',  {
+			  method: 'POST'}
+			)
+		  .then((response) => {
+			return response.json();
+		  })
+		  .then((myJSON) => {
+			this.setState({ data:myJSON});
+		  });
+	}
+
 	render(){
 		var style = {backgroundColor:this.state.data.color};
 		var colorBox = ( <div style={style}> Your color </div> );
+		var randomizeColorBtn = ( <button onClick={this.randomizeColor.bind(this)}> Randomize Color </button> );
 		return(
 			<div>
 				{ this.state.data.username }
 				{ colorBox }
+				{ randomizeColorBtn }
 			</div>
 		);
 	}

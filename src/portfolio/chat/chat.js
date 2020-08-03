@@ -58,7 +58,7 @@ class Chat extends React.Component {
 		}
 	return (
 		<div id="chat_div">
-			<form id="comment_box">
+			<form id="comment_box" onSubmit={this.postChat.bind(this)}>
 				<input 	id="comment_input"
 						type="text"
 						placeholder="chat"
