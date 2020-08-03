@@ -24,7 +24,7 @@ class Profile extends React.Component {
 			return response.json();
 		  })
 		  .then((myJSON) => {
-			this.setState({ data:myJSON});
+			this.getProfile();
 		  });
 	}
 
