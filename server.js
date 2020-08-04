@@ -13,6 +13,7 @@ var multer = mult();
 var session = require('express-session');
 var morgan = require('morgan');
 var fs = require('fs');
+var enableDestroy = require('server-destroy');
 
 var index = require('./routes/index');
 var api = require('./routes/api');
@@ -116,12 +117,16 @@ app.use('*',file_not_found);
 
 var server = app.listen(port,utils.listen);
 
+enableDestroy(server);
+
+function exit(){
+	server.destroy();
+	console.log('\nServer closed.');
+	process.exit(0);
+}
+
 //On shutdown, exit with code 0
 //SIGINT is when you ctrl+c
-process.on('SIGINT', () => {
-	console.log('\nClosing server.');
-	server.close(() => {
-		console.log('Server closed.');
-		process.exit(0);
-	});
-});
+//SIGTERM is when the OS wants it dead, but no big deal
+process.on('SIGINT' ,exit);
+process.on('SIGTERM',exit);
