@@ -1,11 +1,15 @@
+'use strict'
+
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb').MongoClient;
 var utils = require('../../utils');
 
-const url = 'mongodb://localhost:27017';
+const config = utils.getConfig();
+var url = config.mongo.url;
 const dbname = 'chat';
 const collName = "comments";
+
 
 router.get('/',function (req,res) {
 	var client = new mongo(url,{ useUnifiedTopology: true });
@@ -13,16 +17,18 @@ router.get('/',function (req,res) {
 		return client.db(dbname);
 	}).then((db) => {
 		const collection = db.collection(collName);
-		collection.find().sort({utc:-1}).toArray().then((docs) => {
+		collection.find().sort({utc:-1}).limit(15).toArray().then((docs) => {
 		res.status(200).json(docs);
 	}).catch((err) => {
-		console.log(err); //is funky, needs to be redone.
+		console.log(err); 
 	})
 	}).catch((err) => {
 		console.log(err);
 	}); 
 	
 });
+
+
 
 //uses the logged in user's color now
 //it used to use a variable that was isolated to the script
