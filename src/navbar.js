@@ -22,16 +22,47 @@ class NavBarClass extends React.Component {
 		  });
 	}
 
+	linkHandler(link) {
+		window.location.href = link;
+	}
+
 	render() {
-		var userMessage = ( <a href="/u/login"> You are logged out, please login </a> );
+		var userMessage = ( <div className="navbar_item dropdown">
+								<button className="dropBTN"
+										onClick={this.linkHandler.bind(this, "/u/login")}> 
+									Login 
+								</button> 
+								<div className="dropdown-content">
+									<button className="dropItem" onClick={this.linkHandler.bind(this, "/u/register")}> Register </button>
+									<button className="dropItem" onClick={this.linkHandler.bind(this, "/u/login")}> Login </button>
+								</div>
+							</div>);
 		if(this.state.isLoggedIn) {
-			userMessage = ( <a> Welcome {this.state.data.username} </a> );
+			userMessage = ( <div className="navbar_item dropdown"> 
+								<button className="dropBTN"
+										onClick={this.linkHandler.bind(this, "/u/profile")}> 
+									Welcome {this.state.data.username} 
+								</button>
+								<div className="dropdown-content">
+									<button className="dropItem" onClick={this.linkHandler.bind(this, "/u/profile")}> Profile</button>
+									<button className="dropItem" onClick={this.linkHandler.bind(this, "/u/logout")}> Logout </button>
+								</div>
+							 </div> );
 		}
 		return (
-			<div>
-				<a href="/"> Home </a>
-				<a href="/p"> Portfolio </a>
-				<a href="/u"> Users </a>
+			<div id="navbar_container">
+				<div className="navbar_item">
+					<button className="dropBTN"
+    						onClick={this.linkHandler.bind(this, '/')}> Home </button>
+				</div>
+				<div className="navbar_item dropdown">
+					<button className="dropBTN"
+    					onClick={this.linkHandler.bind(this, '/p')}> Portfolio </button>
+					<div className="dropdown-content">
+						<button className="dropItem" onClick={this.linkHandler.bind(this, "/p/chat")}> Chat </button>
+						<button className="dropItem" onClick={this.linkHandler.bind(this, "/p/aboutSite")}> About </button>
+					</div>
+				</div>
 				{userMessage}
 			</div>
 		);
