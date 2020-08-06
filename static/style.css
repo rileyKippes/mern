@@ -198,7 +198,7 @@ a {
 	border-bottom: solid 1px;
 	border-left: solid 1px;
 	border-right: solid 1px;
-	margin-top:3px;
+	border-top: #111 solid 4px;
 }
 
 .dropitem {
