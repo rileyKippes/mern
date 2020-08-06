@@ -10,7 +10,7 @@ const collName = "users";
 
 router.get('/',function (req,res) {
 	if(req.user === undefined || req.user === null) {
-		req.status(400).json({});
+		res.status(400).json({});
 	}
 	res.status(200).json(req.user);
 });
