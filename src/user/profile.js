@@ -6,7 +6,7 @@ class Profile extends React.Component {
 	}
 
 	getProfile(){
-		fetch('/u/profile/api')
+		fetch('/u/api')
 		  .then((response) => {
 			return response.json();
 		  })
@@ -17,7 +17,7 @@ class Profile extends React.Component {
 
 
 	randomizeColor(){
-		fetch('/u/profile/api',  {
+		fetch('/u/api',  {
 			  method: 'POST'}
 			)
 		  .then((response) => {

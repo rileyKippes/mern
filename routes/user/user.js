@@ -7,6 +7,7 @@ var register = require('./register');
 var login = require('./login');
 var deleteU = require('./delete');
 var profile = require('./profile');
+var api = require('./api');
 
 router.get('/',function (req,res) {
 	res.send(utils.getBetterHTMLTemplate('user/user.html',{title:"Account Management"}));
@@ -24,5 +25,6 @@ router.use('/logout',function(req, res){
   req.logout();
   res.redirect('/u');
 });
+router.use('/api',api);
 
 module.exports = router;

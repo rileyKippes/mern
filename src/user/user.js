@@ -8,7 +8,7 @@ class UserIndex extends React.Component {
 	}
 
 	getProfile(){
-		fetch('/u/profile/api')
+		fetch('/u/api')
 		  .then((response) => {
 			return response.json();
 		  })
