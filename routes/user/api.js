@@ -10,9 +10,12 @@ const collName = "users";
 
 router.get('/',function (req,res) {
 	if(req.user === undefined || req.user === null) {
-		res.status(400).json({});
+		res.status(401).json({
+			status:401,
+			message:"You are not logged in" });
 	}
-	res.status(200).json(req.user);
+	else { res.status(200).json(req.user); }
+	
 });
 
 function generateColor(){
@@ -33,7 +36,6 @@ router.post('/',function (req,res) {
 	}).then((db) => {
 		const collection = db.collection(collName);
 		var newColor = generateColor();
-		console.log(JSON.stringify(req.body,null,2));
 		// Insert a comment.
 		collection.updateOne(
 			{_id:req.user._id},

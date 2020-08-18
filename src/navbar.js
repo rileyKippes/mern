@@ -13,30 +13,23 @@ class NavBarClass extends React.Component {
 			return response.json();
 		  })
 		  .then((myJSON) => {
-			if(myJSON.status === 500){
-				this.state.isLoggedIn = false;
+			if(myJSON.status == 401){
+				this.setState({ isLoggedIn:false });
 			}
 			else {
 				this.setState({ isLoggedIn:true, data:myJSON});
 			}
-		  });
+		  }).catch((err) => {
+			console.error(err);
+		});
 	}
-
+	
 	linkHandler(link) {
 		window.location.href = link;
 	}
 
 	render() {
-		var userMessage = ( <div className="navbar_item dropdown">
-								<button className="dropBTN"
-										onClick={this.linkHandler.bind(this, "/u/login")}> 
-									Login 
-								</button> 
-								<div className="dropdown-content">
-									<button className="dropItem" onClick={this.linkHandler.bind(this, "/u/register")}> Register </button>
-									<button className="dropItem" onClick={this.linkHandler.bind(this, "/u/login")}> Login </button>
-								</div>
-							</div>);
+		var userMessage;
 		if(this.state.isLoggedIn) {
 			userMessage = ( <div className="navbar_item dropdown"> 
 								<button className="dropBTN"
@@ -48,6 +41,18 @@ class NavBarClass extends React.Component {
 									<button className="dropItem" onClick={this.linkHandler.bind(this, "/u/logout")}> Logout </button>
 								</div>
 							 </div> );
+		}
+		else {
+			userMessage = ( <div className="navbar_item dropdown">
+								<button className="dropBTN"
+										onClick={this.linkHandler.bind(this, "/u/login")}> 
+									Login 
+								</button> 
+								<div className="dropdown-content">
+									<button className="dropItem" onClick={this.linkHandler.bind(this, "/u/register")}> Register </button>
+									<button className="dropItem" onClick={this.linkHandler.bind(this, "/u/login")}> Login </button>
+								</div>
+							</div>);
 		}
 		return (
 			<div id="navbar_container">

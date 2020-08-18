@@ -16,7 +16,6 @@ var fs = require('fs');
 var enableDestroy = require('server-destroy');
 
 var index = require('./routes/index');
-var api = require('./routes/api');
 var portfolio = require('./routes/portfolio/portfolio');
 var user = require('./routes/user/user');
 var file_not_found = require('./routes/file_not_found'); 
@@ -75,7 +74,6 @@ passport.deserializeUser(function(_id, done) {
 		}
 		done(null, user);
 		}).catch((err) => {
-		console.log(err);
 		done(new Error('Error: '+err));
 	});
 	});
@@ -108,7 +106,6 @@ app.use(passport.session());
 *******************/
 
 app.use('/',index);
-app.use('/api',api);
 app.use('/p',portfolio);
 app.use('/u',user);
 app.use(express.static('public'));
