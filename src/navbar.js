@@ -65,6 +65,7 @@ class NavBarClass extends React.Component {
     					onClick={this.linkHandler.bind(this, '/p')}> Portfolio </button>
 					<div className="dropdown-content">
 						<button className="dropItem" onClick={this.linkHandler.bind(this, "/p/chat")}> Chat </button>
+						<button className="dropItem" onClick={this.linkHandler.bind(this, "/p/messages")}> Messaging </button>
 						<button className="dropItem" onClick={this.linkHandler.bind(this, "/p/aboutSite")}> About </button>
 					</div>
 				</div>

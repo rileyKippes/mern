@@ -110,7 +110,7 @@ label {
 
 /** End Chat CSS **/ 
 
-.comment {
+.comment, .message {
 	border-collapse: collapse;
 	border-bottom: solid 1px;
 	border-left: solid 3px;

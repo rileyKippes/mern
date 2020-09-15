@@ -13,7 +13,7 @@ class UserIndex extends React.Component {
 			return response.json();
 		  })
 		  .then((myJSON) => {
-			if(myJSON.status === 500){
+			if(myJSON.status === 401){
 				this.state.isLoggedIn = false;
 			}
 			else {
