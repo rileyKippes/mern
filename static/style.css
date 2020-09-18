@@ -1,7 +1,5 @@
 * {
- 	
 	color:#AAAAAA;
-	
 	margin-left: 0px;
 	margin-right: 0px;
 	padding: 0px;
@@ -28,15 +26,9 @@
 	z-index: 1;
 }
 
-table,tr,td,th {
-	border: solid 1px;
-	border-collapse: collapse;
-}
-
 h1, h2, h3 {
 	text-align:center;
 }
-
 
 .vert_list {
 	padding: 5px;
@@ -125,9 +117,6 @@ a {
 	padding-left: 4px;
 	padding-right: 4px;
 }
-
-
-
 #errorMessage {
 	background-color: darkred;
 	border: solid 1px;
@@ -135,10 +124,7 @@ a {
 	padding: 3px;
 }
 
-
 /** Navbar **/
-
-
 
 #navbar {
 	position: fixed;
@@ -153,7 +139,6 @@ a {
 	min-width: auto;
 	z-index: 2;
 }
-
 
 #navbar_container {
 	background-color: #111;
@@ -219,6 +204,10 @@ a {
 	color: #eee;	
 }
 
+/* End Navbar */
+
+/* Messages */
+
 #messages_container {
 	width: 100%
 }
@@ -238,3 +227,5 @@ a {
 .senderTab:hover > .message {
 	display: inline;
 }
+
+/* End Messages */
