@@ -1,6 +1,5 @@
 class Messages extends React.Component {
 	constructor(props) {
-		super(props);
 		this.state = {
 			ready: false,
 			data: {},
@@ -66,16 +65,11 @@ class Messages extends React.Component {
 				};
 
 				function checkSender(sender) {
-					console.log(""+(sender == data.sender).toString() + " = "+sender+" == "+data.sender );
 					return sender === data.sender;
 				}
-				console.log(data);
-				console.log("Index:"+sendersList.indexOf(checkSender));
-				console.log("DS IO:"+sendersList.indexOf(data.sender));
 				if (!sendersList.includes(data.sender)) {
 					sendersList.push(data.sender);
 					var index = sendersList.indexOf(data.sender);
-					console.log("Sender " + data.sender + " not found, new index is "+index);
 					messages[index] = [];
 					messages[index].push((
 						<div className="message"
