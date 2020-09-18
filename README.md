@@ -1,7 +1,9 @@
 MERN Stack Webserver by Riley Harlan Kippes
 
 Features include being able to register, log in, log out, and view your personal account.
-You can also chat on the chat box
+You can also chat on the chat box, and send direct messages to each other.
+
+Being pretty was not a concern, function was.
 
 To Build, run "npm run build"
 
@@ -29,7 +31,7 @@ MongoDB, Express, ReactJS, NodeJS
 
 -- Future features ideas to be implemented --
 
-Add the ability to modify and delete accounts. 
+Add the ability to delete accounts. I need to add this before go live, for gpdr stuff.
 
 Maybe some sort of blog posting system, a bit like twitter. 
 
