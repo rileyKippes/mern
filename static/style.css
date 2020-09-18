@@ -218,3 +218,23 @@ a {
 	background-color: #000;
 	color: #eee;	
 }
+
+#messages_container {
+	width: 100%
+}
+
+.senderTab {
+	justify-self: left;
+	width: 100%;
+	border-left: solid 1px;
+	border-top: solid 1px;
+	border-top-left-radius: 5px;
+}
+
+.message {
+	display:none;
+}
+
+.senderTab:hover > .message {
+	display: inline;
+}
