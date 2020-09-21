@@ -1,7 +1,8 @@
 MERN Stack Webserver by Riley Harlan Kippes
 
 Features include being able to register, log in, log out, and view your personal account.
-You can also chat on the chat box, and send direct messages to each other.
+You can also chat on the chat box, and send direct messages to each other. There's also an
+engine displacement calculator that uses 1-way data binding.
 
 Being pretty was not a concern, function was.
 

@@ -8,6 +8,7 @@ var ensureLoggedIn = require('connect-ensure-login');
 var chat = require('./chat/chat');
 var aboutSite = require('./aboutSite');
 var messages = require('./messages/messages');
+var calculator = require('./calculator.js');
 
 router.get('/',function (req,res) {
 	res.send(utils.getBetterHTMLTemplate('/portfolio/portfolio.html',{title:"Portfolio"}));
@@ -18,5 +19,6 @@ router.use('/aboutSite',aboutSite);
 router.use('/messages',
 	ensureLoggedIn.ensureLoggedIn('/u/login'),
 	messages);
+router.use('/calculator',calculator);
 
 module.exports = router;
