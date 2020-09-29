@@ -7,10 +7,12 @@
 
 #main_div_container {
 	background-color:#101010;
-	height: 100%;
+	height: 250%;
 	width: 100%;
 	margin-top: 20px;
 	z-index: 0;
+
+	padding-bottom: 10px;
 }
 
 #main_div {
@@ -209,7 +211,7 @@ a {
 /* Messages */
 
 #messages_container {
-	width: 100%
+	width: 100%;
 }
 
 .senderTab {
@@ -220,12 +222,20 @@ a {
 	border-top-left-radius: 5px;
 }
 
-.message {
+.hideable {
 	display:none;
 }
 
-.senderTab:hover > .message {
+.senderTab:hover > .hideable{
 	display: inline;
+}
+
+.message_flexbox_container {
+	max-width: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-right: solid 1px;
 }
 
 /* End Messages */

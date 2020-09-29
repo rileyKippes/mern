@@ -6,6 +6,11 @@ class Messages extends React.Component {
 			data: {},
 			user: {}
 		};
+
+		this.setUser = this.setUser.bind(this);
+		this.getAPI = this.getAPI.bind(this);
+		this.postMessage = this.postMessage.bind(this);
+
 		this.setUser();
 		this.getAPI(); //doesn't need to refresh like chat.js does
 	}
@@ -14,8 +19,7 @@ class Messages extends React.Component {
 		fetch('/u/api')
 			.then((response) => {
 				return response.json();
-			})
-			.then((myJson) => {
+			}).then((myJson) => {
 				//part of initialization
 				//so we can't use setState
 				this.state = { ready: true, data: this.state.data, user: myJson };
@@ -26,27 +30,25 @@ class Messages extends React.Component {
 		fetch('/p/messages/api')
 			.then((response) => {
 				return response.json();
-			})
-			.then((myJson) => {
+			}).then((myJson) => {
 				this.setState({ ready: true, data: myJson, user: this.state.user });
 			});
-
 	}
 
-
-
-	postMessage() {
-		const form = new FormData(document.getElementById("comment_box"));
+	postMessage(event){
+		//it works, but also gives an error that doesn't have a line number. Very odd. 
+		//I'll add it to the bug tracker.
+		event.preventDefault();
+		const form = new FormData(event.target);
 		fetch('/p/messages/api', {
 			method: 'POST',
 			body: form
-		}
-		).then((response) => {
+		}).then((response) => {
 			return response.json();
-		})
-			.then((myJson) => {
-				this.setState({ ready: true, data: myJson });
-			});
+		}).then((myJson) => {
+			this.setState({ ready: true, data: myJson });
+			this.getAPI();
+		});
 	}
 
 	render() {
@@ -56,73 +58,118 @@ class Messages extends React.Component {
 		//first build senders list and messages
 		//then build sender tabs with messages inserted
 		//it's more modular that way
+
 		if (this.state.ready) {
 			var messages = [];
-			var sendersList = [];
-			var senderTabs = [];
+			var othersList = [];
+			var otherTabs = [];
 			for (var data of this.state.data) {
-				var currStyle = {
-					borderColor: data.color
-				};
+				var containerStyle;
+				var messageStyle = { borderColor:data.color};
 
-				function checkSender(sender) {
-					return sender === data.sender;
+				function findOther(username){
+					if(data.sender === username){
+						containerStyle = {
+							"display": "flex",
+							"justifyContent": "right"
+						};
+						return data.reciever;
+					} 
+					containerStyle = {
+						"display": "flex",
+						"justifyContent": "left"
+					};
+					return data.sender;
 				}
-				if (!sendersList.includes(data.sender)) {
-					sendersList.push(data.sender);
-					var index = sendersList.indexOf(data.sender);
-					messages[index] = [];
-					messages[index].push((
-						<div className="message"
-							key={data._id}
-							style={currStyle}>
-							{data.newMessage}
-						</div>
-					));
+				var other = findOther(this.state.user.username);
+
+				function checkOther() {
+					return othersList.includes(other);
+				}
+				var message = ( <div style={containerStyle}
+									key={data._id}>
+									<div className="message"
+										style={messageStyle}>
+										{data.newMessage}
+									</div> 
+								</div>);
+				if(checkOther()){
+					messages[othersList.indexOf(other)].push(message);
 				}
 				else {
-					messages[sendersList.indexOf(data.sender)].push((
-						<div className="message"
-							key={data._id}
-							style={currStyle}>
-							{data.newMessage}
-						</div>
-					));
+					othersList.push(other);
+					var index = othersList.indexOf(other);
+					messages[index] = [];
+					messages[index].push(message);
 				}
 			}
+
 			
-			for(var i = 0; i < sendersList.length; i++){
-				senderTabs.push(
-					<div key={sendersList[i]}
+			for(var i = 0; i < othersList.length; i++){
+
+				//somethings have trash data that hasn't been cleaned out
+				//including my test data
+				//so you run a sanity check or two.
+				if(othersList[i] === "" || othersList[i] === null){ 
+					continue; 
+				} 
+					
+
+				otherTabs.push(
+					<div key={othersList[i]}
 						className="senderTab">
-						{sendersList[i]}
-						{messages[i]}
+						{othersList[i]}
+						<div className="hideable">
+							<div className="message_flexbox_container">
+								{messages[i]}
+							</div>
+							<form id={"message_form_"+othersList[i]}
+								className="hideable_message_form"
+								onSubmit={this.postMessage}>
+								<input id="message_input"
+									type="text"
+									placeholder="Message Goes Here"
+									name="newMessage">
+								</input>
+								<input id="reciever_input"
+									type="text"
+									value={othersList[i]}
+									readOnly
+									hidden
+									name="reciever">
+								</input>
+								<input id="post_message_btn"
+									type="submit"
+									value=" > ">
+								</input>
+							</form>
+						</div>
 					</div>
 				);
 			}
 
-
 			return (
 				<div id="messages_div">
-					<form id="comment_box" onSubmit={this.postMessage.bind(this)}>
-						<input id="comment_input"
+					<form id="message_form" onSubmit={this.postMessage}>
+						<input id="message_input"
 							type="text"
 							placeholder="Message Goes Here"
-							name="newMessage">
+							name="newMessage"
+							required>
 						</input>
 						<input id="reciever_input"
 							type="text"
 							placeholder="Send to"
-							name="reciever">
+							name="reciever"
+							required>
 						</input>
 						<input id="post_message_btn"
-							type="button"
-							value=" > "
-							onClick={this.postMessage.bind(this)}>
+							type="submit"
+							value=" > ">
 						</input>
 					</form>
 					<div id="message_box">
-						{senderTabs}
+						{otherTabs}
 					</div>
 				</div>
 			);

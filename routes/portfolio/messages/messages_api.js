@@ -15,7 +15,9 @@ router.get('/',function (req,res) {
 		return client.db(dbname);
 	}).then((db) => {
 		const collection = db.collection(collName);
-		collection.find({reciever:req.user.username}).sort({utc:-1}).limit(15).toArray().then((docs) => {
+
+	//> db.messages.find({ $or: [ {sender:"Hello"}, {reciever:"Hello"}]});
+		collection.find({ $or: [ {sender:req.user.username}, {reciever:req.user.username}]}).sort({utc:-1}).toArray().then((docs) => {
 		res.status(200).json(docs);
 	}).catch((err) => {
 		console.log(err); 
@@ -25,6 +27,7 @@ router.get('/',function (req,res) {
 		console.log(err);
 		res.status(500).json({error:err});
 	}); 
+
 });
 
 //post messages
@@ -43,6 +46,13 @@ router.post('/',function (req,res) {
 		else{
 			utils.debug("Cookie:"+JSON.stringify(req.cookies));
 		}
+		console.log({
+			newMessage:newMessage,
+			utc:currUTC,
+			sender:req.user.username,
+			reciever:req.body.reciever,
+			color:req.user.color
+		});
 		// Insert a comment.
 		collection.insertOne({
 						newMessage:newMessage,
