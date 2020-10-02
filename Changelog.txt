@@ -1,0 +1,9 @@
+Changelog
+
+Todo: fill this out
+
+0.9.0
+Added much needed functionality
+
+0.10.0
+The Pretty update

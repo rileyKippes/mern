@@ -92,7 +92,7 @@ passport.use(new localStrategy(function(username,password,done) {
 			return done(null, user);
 		}).catch((err) => {
 			console.log(err);
-			done(new Error('Error: '+err)); });
+			return done(new Error('Error: '+err)); });
 		
 		});
 	});

@@ -52,7 +52,7 @@ class Chat extends React.Component {
 					borderColor: data.cookie
 				};
 				chat.push((
-					<div className="comment"
+					<div className="comment border-bottom border-left"
 						key={data._id}
 						style={currStyle}>
 						{data.comment}
@@ -60,28 +60,33 @@ class Chat extends React.Component {
 				));
 			}
 			return (
-				<div id="chat_div">
-					<form id="comment_box" onSubmit={this.postChat.bind(this)}>
+				<div className="card bg-light text-dark">
+					<form id="comment_box" className="card-header form-group row" onSubmit={this.postChat.bind(this)}>
 						<input id="comment_input"
+							className="form-control col-sm-10 mx-3"
 							type="text"
-							placeholder="chat"
+							placeholder="Chat"
 							name="comment">
 						</input>
 						<input id="post_chat_btn"
+							className="btn btn-primary col-sm-1 mx-3"
 							type="button"
 							value=" > "
 							onClick={this.postChat.bind(this)}>
 						</input>
 					</form>
-					<div id="chat_box">
+					<div id="chat_box"
+						className="card-body">
 						{chat}
 					</div>
-					<div id="debug_buttons">
-						<button onClick={this.pauseChat.bind(this)}>
+					<div id="debug_buttons"
+						className="card-footer">
+						<button className="btn btn-primary"
+							onClick={this.pauseChat.bind(this)}>
 							{this.state.paused ? "Unpause" : "Pause"} Chat
 				</button>
 					</div>
-				</div>
+				</div >
 			);
 		}
 		return (

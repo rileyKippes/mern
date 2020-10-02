@@ -35,7 +35,7 @@ class Messages extends React.Component {
 			});
 	}
 
-	postMessage(event){
+	postMessage(event) {
 		//it works, but also gives an error that doesn't have a line number. Very odd. 
 		//I'll add it to the bug tracker.
 		event.preventDefault();
@@ -65,16 +65,16 @@ class Messages extends React.Component {
 			var otherTabs = [];
 			for (var data of this.state.data) {
 				var containerStyle;
-				var messageStyle = { borderColor:data.color};
+				var messageStyle = { borderColor: data.color };
 
-				function findOther(username){
-					if(data.sender === username){
+				function findOther(username) {
+					if (data.sender === username) {
 						containerStyle = {
 							"display": "flex",
 							"justifyContent": "right"
 						};
 						return data.reciever;
-					} 
+					}
 					containerStyle = {
 						"display": "flex",
 						"justifyContent": "left"
@@ -86,14 +86,14 @@ class Messages extends React.Component {
 				function checkOther() {
 					return othersList.includes(other);
 				}
-				var message = ( <div style={containerStyle}
-									key={data._id}>
-									<div className="message"
-										style={messageStyle}>
-										{data.newMessage}
-									</div> 
-								</div>);
-				if(checkOther()){
+				var message = (<div style={containerStyle}
+					key={data._id}>
+					<div className="message"
+						style={messageStyle}>
+						{data.newMessage}
+					</div>
+				</div>);
+				if (checkOther()) {
 					messages[othersList.indexOf(other)].push(message);
 				}
 				else {
@@ -104,44 +104,53 @@ class Messages extends React.Component {
 				}
 			}
 
-			
-			for(var i = 0; i < othersList.length; i++){
+
+			for (var i = 0; i < othersList.length; i++) {
 
 				//somethings have trash data that hasn't been cleaned out
 				//including my test data
 				//so you run a sanity check or two.
-				if(othersList[i] === "" || othersList[i] === null){ 
-					continue; 
-				} 
-					
+				if (othersList[i] === "" || othersList[i] === null) {
+					continue;
+				}
+
 
 				otherTabs.push(
 					<div key={othersList[i]}
-						className="senderTab">
-						{othersList[i]}
-						<div className="hideable">
-							<div className="message_flexbox_container">
+						className="senderTab card bg-light text-dark">
+						<div className="card-header" >
+							<a class="btn btn-primary" data-toggle="collapse" href={".hideable_"+othersList[i]} role="button">
+								{othersList[i]}
+							</a>
+						</div>
+
+						<div className={"collapse hideable_"+othersList[i]}>
+							<div className="card-body">
 								{messages[i]}
 							</div>
-							<form id={"message_form_"+othersList[i]}
-								className="hideable_message_form"
+							<form id={"message_form_" + othersList[i]}
+								className="card-footer hideable_message_form"
 								onSubmit={this.postMessage}>
-								<input id="message_input"
-									type="text"
-									placeholder="Message Goes Here"
-									name="newMessage">
-								</input>
-								<input id="reciever_input"
-									type="text"
-									value={othersList[i]}
-									readOnly
-									hidden
-									name="reciever">
-								</input>
-								<input id="post_message_btn"
-									type="submit"
-									value=" > ">
-								</input>
+								<div className="form-group row">
+									<input id="message_input"
+										type="text"
+										className="form-control col-sm-10 mr-1"
+										placeholder="Message Goes Here"
+										name="newMessage">
+									</input>
+									<input id="reciever_input"
+										type="text"
+										value={othersList[i]}
+										readOnly
+										hidden
+										name="reciever">
+									</input>
+									<input id="post_message_btn"
+										type="submit"
+										className="btn btn-primary col-sm-1"
+										value=" > ">
+									</input>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -149,26 +158,29 @@ class Messages extends React.Component {
 			}
 
 			return (
-				<div id="messages_div">
-					<form id="message_form" onSubmit={this.postMessage}>
+				<div id="messages_div px-3">
+					<form className="w-100 p-1" id="message_form" onSubmit={this.postMessage}>
 						<input id="message_input"
+							className="w-75 mx-1 px-3"
 							type="text"
 							placeholder="Message Goes Here"
 							name="newMessage"
 							required>
 						</input>
 						<input id="reciever_input"
+							className="mx-1 px-3"
 							type="text"
 							placeholder="Send to"
 							name="reciever"
 							required>
 						</input>
 						<input id="post_message_btn"
+							className="mx-1 px-3"
 							type="submit"
 							value=" > ">
 						</input>
 					</form>
-					<div id="message_box">
+					<div id="message_box" className="card-columns p-1">
 						{otherTabs}
 					</div>
 				</div>

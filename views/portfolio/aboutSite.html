@@ -1,19 +1,68 @@
-<h1> About this site  and MERN stack </h1>
-<p> This site was made to showcase my talents. It houses my portfolio, and it by itself is part of that </p>
+<h1 class="text-center"> About this site and MERN stack </h1>
+<p class="text-center"> This site was made to showcase my talents. It houses my portfolio, and it by itself is part of that portfolio </p>
 
-<h3> React </h3>
-<p> ReactJS is used here for all of the dynamic elements, and the few often reused elements, like the Navigation Bar. It's written in JSX, and compiled with Babel.
-A good example of this is the chat box. It makes calls back and forth, updates automatically, and even has dynamic styling. You can check it out<a href="/p/chat"> here </a> </p>
+<div class="card-columns">
+    
 
-<h3> Chat </h3>
-<p> I have made a chatbox that has all the typical chatbox features. 
-You can get the last 15 comments, post a new comment, and every comment has dynamic styling in order to make seeing who said what much easier. It pulls the color from the logged in user session. </p>
+    <div class="card bg-light text-dark">
+        <h3 class="card-header card-title"> Chat </h3>
+        <p class="card-body card-text"> I have made a chatbox that has all the typical chatbox features.
+            You can get the last 15 comments, post a new comment, and every comment has dynamic styling in order to make
+            seeing who said what much easier. It pulls the color from the logged in user session. </p>
+        <div class="card-footer">
+            <a class="btn btn-primary" href="/p/chat"> Chat now </a>
+        </div>
+    </div>
 
-<h3> User accounts </h3>
-<p> There is a account system in place. You can register an account, log in to it, log out, and view the account details. As a bonus, all passwords are hashed and salted. </p>
+    <div class="card bg-light text-dark">
+        <h3 class="card-header card-title"> User accounts </h3>
+        <p class="card-body card-text"> There is a account system in place. You can register an account, log in to it,
+            log
+            out, and view the account details. As a bonus, all passwords are hashed and salted. </p>
+        <div class="card-footer">
+            <a class="btn btn-primary" href="/u/login"> You can login here </a>
+        </div>
+    </div>
 
-<h3>Direct Messaging</h3>
-<p> DMs are restricted to logged in members, and further explores the passsport framework. It even has modern features like tabs. </p>
+    <div class="card bg-light text-dark">
+        <h3 class="card-header card-title">Direct Messaging</h3>
+        <p class="card-body card-text"> DMs are restricted to logged in members, and further explores the passsport
+            framework. It even has modern features like tabs. </p>
+        <div class="card-footer">
+            <a class="btn btn-primary" href="/p/messages"> Send a message to someone </a>
+        </div>
+    </div>
 
-<h3>Calculator</h3>
-<p> One of the biggest features of React is one-way data binding. Unfortunately, I haven't found much use for it in many features. But with this engine displacement calculator, I can show off the data binding feature. </p>
+    <div class="card bg-light text-dark">
+        <h3 class="card-header card-title">Calculator</h3>
+        <p class="card-body card-text"> One of the biggest features of React is one-way data binding. Unfortunately, I
+            haven't found much use for it in many features. But with this engine displacement calculator, I can show off
+            the
+            data binding feature. </p>
+        <div class="card-footer">
+            <a class="btn btn-primary" href="/p/calculator"> Calculate some cubic inches! </a>
+        </div>
+    </div>
+
+    <div class="card bg-light text-dark">
+        <h3 class="card-header card-title"> React </h3>
+        <p class="card-body card-text"> ReactJS is used here for all of the dynamic elements, and the few often reused
+            elements, like the Navigation Bar. It's written in JSX, and compiled with Babel.
+            A good example of this is the chat box. It makes calls back and forth, updates automatically, and even has
+            dynamic styling. </p>
+    </div>
+
+    <div class="card bg-light text-dark">
+        <h3 class="card-header card-title">Bootstrap</h3>
+        <p class="card-body card-text"> One of the worst issues I faced was I going to make this entire thing look good.
+            I tried custom css, and that ended up looking pretty ugly. So now I just use bootstrap.</p>
+    </div>
+
+    <div class="card bg-light text-dark">
+        <h3 class="card-header card-title">Passport and BCrypt</h3>
+        <p class="card-body card-text"> One of the biggest concerns I had was securing accounts. Sure, this site
+            probably won't do much more than help get me hired, but I didn't want plain-text passwords either. So I
+            used passport to handle logins (with the local strategy) and bcrypt to actually encrypt the passwords.
+            Worked beautifully. </p>
+    </div>
+</div>
