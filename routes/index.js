@@ -7,7 +7,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 router.get('/',function (req,res) {
-	res.send(utils.getBetterHTMLTemplate('index.html',{title:"Riley Kippes' website"}));
+	res.send(utils.getBetterHTMLTemplate('index.html',{title:"Website without much content"}));
 });
 
 module.exports = router;

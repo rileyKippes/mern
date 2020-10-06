@@ -28,7 +28,7 @@ static getCustomHTMLHead(data){
 	html += '<html lang="en">\n'
 	html += '<head>\n';
 	if(data.title === undefined){
-		html += "<title> Riley Kippes' website </title>\n";
+		html += "<title> A Website without much content </title>\n";
 	}
 	else{
 		html += '<title> '+data.title+' </title>\n';
