@@ -46,8 +46,7 @@ static getCustomHTMLHead(data){
 	html += '<body class="bg-dark text-light">\n';
 	html += '<nav class="navbar navbar-expand-md bg-dark navbar-dark"> Navbar </nav>\n';
 	html += '<script src="/navbar.js"></script>\n';
-	html += '<div id="main_div_container" >\n';
-	html += '<div id="main_div" class="px-3 pb-3">\n';
+	html += '<div id="main_div" class="mx-3 mb-3 px-2">\n';
 	return html;
 }
 
@@ -60,7 +59,6 @@ static getBetterHTMLTemplate(template, data){
 		var html = this.getCustomHTMLHead(data);
 	}
 	html += fs.readFileSync('./views/'+template);
-	html += "</div>";
 	html += "</div>";
 	html += "</body>";
 	html += "</html>";
