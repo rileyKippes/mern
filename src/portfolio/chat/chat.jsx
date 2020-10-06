@@ -49,10 +49,12 @@ class Chat extends React.Component {
 			var chat = [];
 			for (var data of this.state.data) {
 				var currStyle = {
+					borderLeftStyle: "solid",
 					borderColor: data.cookie
 				};
 				chat.push((
-					<div className="comment border-bottom border-left"
+					<div id="comment" 
+						className="border-bottom pl-1"
 						key={data._id}
 						style={currStyle}>
 						{data.comment}

@@ -12,6 +12,9 @@ class Calculator extends React.Component {
     }
 
     calculate() {
+        //calculator is based on inches, but
+        //it also works if you think everything is the same length unit
+        //millimeters and cubic millimeters, centimeters and cubic centimeters
         const c = 3.14159 / 4;
         var boreSq = (this.state.bore) * (this.state.bore);
         var stroke = (this.state.stroke);
@@ -19,11 +22,6 @@ class Calculator extends React.Component {
         return c * boreSq * stroke * numCylinders;
     }
 
-
-    //me repeating code? it's more likely than you think!
-    //although three examples of 3 lines each isn't huge,
-    //I'd still like to make this better
-    //But that's low on my list priorities
     handleBoreChange(event) {
         this.state.bore = event.target.value;
         this.setState({ displacement: this.calculate() })
@@ -81,7 +79,7 @@ class Calculator extends React.Component {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label text-right"> Calculated Displacement  </label>
-                    <div className="col-sm-10">
+                    <div className="col-sm-10 col-form-label text-left">
                         {this.state.displacement}
                     </div>
                 </div>
