@@ -44,7 +44,7 @@ static getCustomHTMLHead(data){
 	html += '<meta charset="utf-8">';
 	html += '</head>\n';
 	html += '<body class="bg-dark text-light">\n';
-	html += '<nav class="navbar navbar-expand-sm bg-dark navbar-dark"> Navbar </nav>\n';
+	html += '<nav class="navbar navbar-expand-md bg-dark navbar-dark"> Navbar </nav>\n';
 	html += '<script src="/navbar.js"></script>\n';
 	html += '<div id="main_div_container" >\n';
 	html += '<div id="main_div" class="px-3 pb-3">\n';
