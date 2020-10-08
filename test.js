@@ -6,7 +6,7 @@ assert.isObject(utils.loadConfig());
 assert.isDefined(utils.getConfig().debug);
 assert.isDefined(utils.getConfig().login);
 
-assert.typeOf(utils.getHTMLHead(),'string','Utils should provide a string head');
-assert.typeOf(utils.getBetterHTMLTemplate('index.html',{title:"test"}),'string','Utils should provide a string');
+assert.typeOf(utils.getBetterHTMLTemplate('index.html',{title:"test"}),'string','Utils template should provide a string');
+assert.typeOf(utils.generateColor(),'string','Utils generate color should provide a string');
 
 console.log("All tests completed!");

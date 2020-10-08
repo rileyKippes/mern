@@ -42,7 +42,7 @@ class Chat extends React.Component {
 	}
 
 	render() {
-
+		//refresh every 1.5 seconds
 		setTimeout(this.getAPI.bind(this), 1500);
 
 		if (this.state.ready) {

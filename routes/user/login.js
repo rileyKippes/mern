@@ -5,14 +5,14 @@ var utils = require('../utils');
 
 // ~/u/post
 router.get('/',
-	function (req,res) {
-		res.send(utils.getBetterHTMLTemplate('user/login.html',{title:"Login User"}));
+	function (req, res) {
+		res.send(utils.getBetterHTMLTemplate('user/login.html', { title: "Login User" }));
 	}
 );
 
 router.post('/',
 	passport.authenticate('local', { failureRedirect: '/u/login?loginFail' }),
-	function(req, res) {
+	function (req, res) {
 		res.redirect('/u/profile');
 	}
 );

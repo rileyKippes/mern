@@ -23,6 +23,8 @@ class Messages extends React.Component {
 				//part of initialization
 				//so we can't use setState
 				this.state = { ready: true, data: this.state.data, user: myJson };
+			}).catch((err) => {
+				console.error(err);
 			});
 	}
 
@@ -32,33 +34,28 @@ class Messages extends React.Component {
 				return response.json();
 			}).then((myJson) => {
 				this.setState({ ready: true, data: myJson, user: this.state.user });
-			});
+			}).catch((err) => {
+				console.error(err);
+			});;
 	}
 
 	postMessage(event) {
-		//it works, but also gives an error that doesn't have a line number. Very odd. 
-		//I'll add it to the bug tracker.
 		event.preventDefault();
 		const form = new FormData(event.target);
 		fetch('/p/messages/api', {
 			method: 'POST',
 			body: form
 		}).then((response) => {
-			return response.json();
-		}).then((myJson) => {
-			this.setState({ ready: true, data: myJson });
 			this.getAPI();
-		});
+		}).catch((err) => {
+			console.error(err);
+		});;
 	}
 
 	render() {
-
-		//needs css
-
 		//first build senders list and messages
 		//then build sender tabs with messages inserted
 		//it's more modular that way
-
 		if (this.state.ready) {
 			var messages = [];
 			var othersList = [];
@@ -119,12 +116,12 @@ class Messages extends React.Component {
 					<div key={othersList[i]}
 						className="senderTab card bg-light text-dark">
 						<div className="card-header" >
-							<a class="btn btn-primary" data-toggle="collapse" href={".hideable_"+othersList[i]} role="button">
+							<a className="btn btn-primary" data-toggle="collapse" href={".hideable_" + othersList[i]} role="button">
 								{othersList[i]}
 							</a>
 						</div>
 
-						<div className={"collapse hideable_"+othersList[i]}>
+						<div className={"collapse hideable_" + othersList[i]}>
 							<div className="card-body">
 								{messages[i]}
 							</div>

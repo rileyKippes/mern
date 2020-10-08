@@ -19,8 +19,6 @@ class NavBarClass extends React.Component {
 				else {
 					this.setState({ isLoggedIn: true, data: myJSON });
 				}
-			}).catch((err) => {
-				console.error(err);
 			});
 	}
 

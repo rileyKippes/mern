@@ -18,7 +18,7 @@ var enableDestroy = require('server-destroy');
 var index = require('./routes/index');
 var portfolio = require('./routes/portfolio/portfolio');
 var user = require('./routes/user/user');
-var file_not_found = require('./routes/file_not_found'); 
+var file_not_found = require('./routes/file_not_found');
 
 
 var port = config.port;
@@ -28,7 +28,7 @@ var accessLogStream = fs.createWriteStream('./access.log');
 app.use(morgan(config.console_log));
 app.use(morgan(config.file_log, { stream: accessLogStream }));
 
-app.use(multer.array()); 
+app.use(multer.array());
 app.use(cookie());
 app.use(body);
 
@@ -48,7 +48,7 @@ var collName = 'users';
 app.use(
 	session({
 		secret: 'Neuromancer is a great book', //random string, used for hash
-			//also, it really is a good book
+		//also, it really is a good book
 		resave: false,
 		saveUninitialized: false
 	})
@@ -56,44 +56,49 @@ app.use(
 
 var bcrypt = require('bcrypt');
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
 	done(null, user._id);
 });
 
-passport.deserializeUser(function(_id, done) {
-	var client = new mongo(mURL,{ useUnifiedTopology: true });
-	client.connect(function(err) {
-		var db =  client.db(dbName);
+passport.deserializeUser(function (_id, done) {
+	var client = new mongo(mURL, { useUnifiedTopology: true });
+	client.connect(function (err) {
+		var db = client.db(dbName);
 		const collection = db.collection(collName);
-		
+
 		var ObjectID = require('mongodb').ObjectID;
 
-		collection.findOne({_id: new ObjectID(_id) } ).then((user) => { 
-		if(user === undefined || user === null){
-			done(new Error('User ' + _id + ' does not exist'));
-		}
-		done(null, user);
+		collection.findOne({ _id: new ObjectID(_id) }).then((user) => {
+			if (user === undefined || user === null) {
+				return done(new Error('User ' + _id + ' does not exist'));
+			}
+			return done(null, user);
 		}).catch((err) => {
-		done(new Error('Error: '+err));
-	});
+			return done(new Error('Error: ' + err));
+		});
 	});
 });
 
-passport.use(new localStrategy(function(username,password,done) {
-	var client = new mongo(mURL,{ useUnifiedTopology: true });
-	client.connect(function(err) {
-		var db =  client.db(dbName);
+//docs were wrong. Again. You can't use the code from the docs.
+passport.use(new localStrategy(function (username, password, done) {
+	var client = new mongo(mURL, { useUnifiedTopology: true });
+	client.connect(function (err) {
+		var db = client.db(dbName);
 		const collection = db.collection(collName);
-		collection.findOne({username:username}).then((user) => { 
-		bcrypt.compare(password, user.password).then((result) => {
-			if(!result){ 
-				return done(null, false, {message: 'Incorrect username or password'}) 
-			};
-			return done(null, user);
+		collection.findOne({ username: username }).then((user) => {
+			bcrypt.compare(password, user.password).then((result) => {
+				if (!result) {
+					return done(null, false, { message: 'Incorrect username or password' });
+				};
+				return done(null, user);
+			}).catch((err) => {
+				console.error(err);
+				return done(null, false, { message: 'Incorrect username or password' });
+			});
+
 		}).catch((err) => {
-			console.log(err);
-			return done(new Error('Error: '+err)); });
-		
+			console.error(err);
+			return done(null, false, { message: 'Incorrect username or password' });
 		});
 	});
 }));
@@ -105,18 +110,18 @@ app.use(passport.session());
 **  End Passport  **
 *******************/
 
-app.use('/',index);
-app.use('/p',portfolio);
-app.use('/u',user);
+app.use('/', index);
+app.use('/p', portfolio);
+app.use('/u', user);
 app.use(express.static('public'));
 app.use(express.static('static'));
-app.use('*',file_not_found);
+app.use('*', file_not_found);
 
-var server = app.listen(port,utils.listen);
+var server = app.listen(port, utils.listen);
 
 enableDestroy(server);
 
-function exit(){
+function exit() {
 	server.destroy();
 	console.log('\nServer closed.');
 	process.exit(0);
@@ -125,5 +130,5 @@ function exit(){
 //On shutdown, exit with code 0
 //SIGINT is when you ctrl+c
 //SIGTERM is when the OS wants it dead, but no big deal
-process.on('SIGINT' ,exit);
-process.on('SIGTERM',exit);
+process.on('SIGINT', exit);
+process.on('SIGTERM', exit);

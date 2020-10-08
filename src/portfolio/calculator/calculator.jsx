@@ -31,14 +31,10 @@ class Calculator extends React.Component {
         var stroke = (this.state.strokeInches);
         var numCylinders = (this.state.numCylinders);
         var ci = c * boreSq * stroke * numCylinders;
-        var cc = ci * 16.3871;
-        var l = ci / 61.024;
-        console.log(this.state);
-        console.log(" " + ci + " Cubic inches = " + cc + " Cubic centimeters = " + l + " Liters");
         this.setState({
             cubicInches: ci,
-            cubicCentimeters: cc,
-            liters: l
+            cubicCentimeters: ci * 16.3871,
+            liters: ci / 61.024
         });
     }
 
