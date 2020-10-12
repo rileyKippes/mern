@@ -24,7 +24,7 @@ class Profile extends React.Component {
 			return response.json();
 		  })
 		  .then((myJSON) => {
-			this.getProfile();
+			this.setState({ data:myJSON});
 		  });
 	}
 
@@ -32,11 +32,13 @@ class Profile extends React.Component {
 		var style = {backgroundColor:this.state.data.color};
 		var colorBox = ( <div style={style}> Your color </div> );
 		var randomizeColorBtn = ( <button onClick={this.randomizeColor.bind(this)}> Randomize Color </button> );
+		var deletelink = (<p> You can permanently delete your account <a href="/u/delete"> here </a></p>);
 		return(
 			<div>
 				{ this.state.data.username }
 				{ colorBox }
 				{ randomizeColorBtn }
+				{deletelink}
 			</div>
 		);
 	}

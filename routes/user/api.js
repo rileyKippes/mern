@@ -26,7 +26,7 @@ router.post('/', function (req, res) {
 		return client.db(dbName);
 	}).then((db) => {
 		const collection = db.collection(collName);
-		var newColor = this.generateColor();
+		var newColor = utils.generateColor();
 		// Insert a comment.
 		collection.updateOne(
 			{ _id: req.user._id },

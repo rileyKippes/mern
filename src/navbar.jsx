@@ -34,6 +34,7 @@ class NavBarClass extends React.Component {
 				<div className="dropdown-menu w-100 text-center">
 					<a className="dropdown-item" href="/u/profile">Profile</a>
 					<a className="dropdown-item" href="/u/logout">Logout</a>
+					<a className="dropdown-item" href="/u/delete">Delete</a>
 				</div>
 			</li>);
 		}

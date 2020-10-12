@@ -42,6 +42,19 @@ class LoginUser extends React.Component {
 				</div>
 			);
 		}
+		if (window.location.search.search("delete_success") != -1) {
+			var message = (
+				<div className="alert alert-success alert-dismissible fade show" id="errorMessage" role="alert">
+					Account successfully deleted.
+					<button type="button" className="close" data-dismiss="alert">&times;</button>
+				</div>);
+			return (
+				<div>
+					{message}
+					{form}
+				</div>
+			);
+		}
 		return (
 			<div>
 				{form}
