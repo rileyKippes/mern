@@ -8,6 +8,7 @@ var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 var cookie = require('cookie-parser');
 var body = require('body-parser').urlencoded({ extended: true });
+var jsonBody = require('body-parser').json();
 var mult = require('multer');
 var multer = mult();
 var session = require('express-session');
@@ -29,8 +30,10 @@ app.use(morgan(config.console_log));
 app.use(morgan(config.file_log, { stream: accessLogStream }));
 
 app.use(multer.array());
+
 app.use(cookie());
 app.use(body);
+app.use(jsonBody);
 
 
 /*******************
@@ -55,6 +58,7 @@ app.use(
 )
 
 var bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
 
 passport.serializeUser(function (user, done) {
 	done(null, user._id);

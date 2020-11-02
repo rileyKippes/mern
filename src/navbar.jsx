@@ -68,6 +68,7 @@ class NavBarClass extends React.Component {
 						aria-haspopup="true" 
 						aria-expanded="false"> Portfolio </a>
 					<div className="dropdown-menu w-100 text-center">
+						<a className="dropdown-item" href="/p/story"> Stories </a>
 						<a className="dropdown-item" href="/p/chat"> Chat </a>
 						<a className="dropdown-item " href="/p/messages"> Messaging </a>
 						<a className="dropdown-item" href="/p/calculator"> Calculator </a>
