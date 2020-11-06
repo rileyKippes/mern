@@ -1,5 +1,6 @@
 var fs = require('fs');
 var config;
+
 class utils {
 
 	static getCustomHTMLHead(data) {

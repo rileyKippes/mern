@@ -1,14 +1,14 @@
 'use strict'
 
-var db = require('../../mongo_manager');
 var express = require('express');
 var router = express.Router();
+
+var db = require('../../../ts_built/mongo_manager');
 
 const collName = "comments";
 
 router.get('/', function (req, res) {
-	var docs = {};
-	db.findSortandLimit(res, collName, {}, { utc: -1 }, 15);
+	db.findSortandLimit(collName, {}, { utc: -1 }, 15).then((ret) => { res.json(ret); });
 });
 
 //uses the logged in user's color now
@@ -25,10 +25,10 @@ router.post('/', function (req, res) {
 		utils.debug("Cookie:" + JSON.stringify(req.cookies));
 	}
 	// Insert a comment.
-	db.insert(res, collName, {
+	db.insert(collName, {
 		comment: newComment,
 		utc: currUTC,
 		cookie: req.user.color
-	});
+	}).then((ret) => { res.status(200); });
 });
 module.exports = router;

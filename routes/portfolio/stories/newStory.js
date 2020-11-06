@@ -4,13 +4,6 @@ var express = require('express');
 var router = express.Router();
 var utils = require('../../utils');
 
-var mongo = require('mongodb');
-var client = mongo.MongoClientl
-const config = utils.getConfig();
-var url = config.mongo.url;
-const dbname = config.mongo.db;
-const collName = "stories";
-
 router.get('/',function (req,res) {
 	res.send(utils.getBetterHTMLTemplate('portfolio/newStory.html',{title:"New Story"}));
 });
@@ -46,9 +39,12 @@ router.post('/',function (req,res) {
 		text: req.body.storyText,
 		pageNum: 0,
 	}
+	db.insert(res,'stories',newStory);
+	db.
 	console.log(newStory);
 	console.log(newPage);
-	res.json({hello:"world"});
+
+	res.json({0:newStory,1:newPage});
 });
 
 module.exports = router;
