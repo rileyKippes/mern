@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var utils = require('../../utils');
+var utils = require('../../../ts_built/utils');
 const collName = "messages";
 
 var db = require('../../../ts_built/mongo_manager');

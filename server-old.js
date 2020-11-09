@@ -1,20 +1,19 @@
 'use strict'
 
-//this is hell
-//tsc compiles to es6
-//but this only works for es5
-//and visual studio thinks it's es6 too
-//but node only runs es5 even though it should use es6 just fine
-//fuck me running
 
 //loadConfig();
-var config = require('./ts_built/config');
-config.loadConfig();
+
+configuration.loadConfig();
 
 var express = require('express');
 var app = express();
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
+var cookie = require('cookie-parser');
+var body = require('body-parser').urlencoded({ extended: true });
+var jsonBody = require('body-parser').json();
+var mult = require('multer');
+var multer = mult();
 var session = require('express-session');
 var morgan = require('morgan');
 var fs = require('fs');
@@ -25,19 +24,18 @@ var portfolio = require('./routes/portfolio/portfolio');
 var user = require('./routes/user/user');
 var file_not_found = require('./routes/file_not_found');
 
-var port = config.getConfig().port;
+var port = configuration.getConfig().port;
 
 //logging
 var accessLogStream = fs.createWriteStream('./access.log');
-app.use(morgan(config.getConfig().consoleLog));
-app.use(morgan(config.getConfig().fileLog, { stream: accessLogStream }));
+app.use(morgan(configuration.getConfig().consoleLog));
+app.use(morgan(configuration.getConfig().fileLog, { stream: accessLogStream }));
 
-var mult = require('multer');
-app.use(mult().array());
+app.use(multer.array());
 
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('body-parser').json());
+app.use(cookie());
+app.use(body);
+app.use(jsonBody);
 
 
 /*******************
@@ -46,8 +44,8 @@ app.use(require('body-parser').json());
 
 var mongo = require('mongodb').MongoClient;
 
-var mURL = config.getConfig().mongo.url;
-var dbName = config.getConfig().mongo.db;
+var mURL = configuration.getConfig().mongo.url;
+var dbName = configuration.getConfig().mongo.db;
 var collName = 'users';
 
 //bcrypt
@@ -63,6 +61,7 @@ app.use(
 
 var bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
+//const { config } = require('chai');
 
 passport.serializeUser(function (user, done) {
 	done(null, user._id);
@@ -124,8 +123,6 @@ app.use('/u', user);
 app.use(express.static('public'));
 app.use(express.static('static'));
 app.use('*', file_not_found);
-
-var utils = require('./ts_built/utils');
 
 var server = app.listen(port, utils.listen);
 

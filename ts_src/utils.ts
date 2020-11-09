@@ -1,9 +1,12 @@
+'use strict'
+
 var fs = require('fs');
-var config;
+
+var config = require('./config');
 
 class utils {
 
-	static getCustomHTMLHead(data) {
+	static getCustomHTMLHead(data: any): string {
 		//this entire thing could be done with templates
 		//will do that at a later date
 		var html = '<!DOCTYPE html>'
@@ -32,8 +35,8 @@ class utils {
 		return html;
 	}
 
-	static getBetterHTMLTemplate(template, data) {
-		var html = this.getCustomHTMLHead(data);
+	static getBetterHTMLTemplate(template, data: any): string {
+		var html: string = this.getCustomHTMLHead(data);
 		html += fs.readFileSync('./views/' + template);
 		html += "</div>";
 		html += "</body>";
@@ -42,33 +45,20 @@ class utils {
 	}
 
 	static listen() {
-		console.log(' Now Listening at http://localhost:' + config.port);
-
+		console.log(' Now Listening at http://localhost:' +  config.getConfig().port); //config.getConfig().port);
 	}
 
 	static debug(message) {
-		if (config.debug) {
+		if(config.getConfig().debug) {
 			console.info(message);
 		}
 	}
 
-	static loadConfig() {
-		config = "" + fs.readFileSync('./config.json');
-		config = JSON.parse(config);
-		this.debug("Config file loaded");
-		this.debug(JSON.stringify(config, null, 2));
-		return config;
-	}
-
-	static getConfig() {
-		return config;
-	}
-
-	static generateColor(){
-		var hex = ['0','a','f'];
+	static generateColor(): string {
+		var hex = ['0', 'a', 'f'];
 		var ret = '#';
 		var rand;
-		for(var i = 0; i < 6; i++){
+		for (var i = 0; i < 6; i++) {
 			rand = Math.floor(Math.random() * hex.length);
 			ret += hex[rand];
 		}

@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var utils = require('../../utils');
+var utils = require('../../../ts_built/utils');
 
 var ensureLoggedIn = require('connect-ensure-login');
 

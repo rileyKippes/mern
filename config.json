@@ -1,6 +1,6 @@
 {
-	"console_log":"dev",
-	"file_log":"common",
+	"consoleLog":"dev",
+	"fileLog":"common",
 	"port":8080,
 	"debug": true,
 	"login": true,

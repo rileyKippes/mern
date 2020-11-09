@@ -20,7 +20,6 @@ class Chat extends React.Component {
 			.then((myJson) => {
 				this.setState({ ready: true, data: myJson });
 			});
-
 	}
 
 	postChat() {

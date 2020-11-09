@@ -11,9 +11,6 @@ router.get('/', function (req, res) {
 	db.findSortandLimit(collName, {}, { utc: -1 }, 15).then((ret) => { res.json(ret); });
 });
 
-//uses the logged in user's color now
-//it used to use a variable that was isolated to the chat script
-//but now it's integrated!
 router.post('/', function (req, res) {
 	var d = new Date();
 	var currUTC = Date.now();

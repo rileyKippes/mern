@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var utils = require('../utils');
+var utils = require('../../ts_built/utils');
 var mongo = require('mongodb').MongoClient;
 
-const config = utils.getConfig();
+const config = require('../../ts_built/config').getConfig();
 var url = config.mongo.url;
 var dbName = config.mongo.db;
 const collName = "users";

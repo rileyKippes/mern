@@ -3,9 +3,9 @@ var router = express.Router();
 var mongodb = require('mongodb');
 var mongo = mongodb.MongoClient;
 var bcrypt = require('bcrypt');
-var utils = require('../utils');
+var utils = require('../../ts_built/utils');
 
-const config = utils.getConfig();
+const config = require('../../ts_built/config').getConfig();
 var url = config.mongo.url;
 var dbName = config.mongo.db;
 var collName = 'users';
