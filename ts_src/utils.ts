@@ -35,9 +35,19 @@ class utils {
 		return html;
 	}
 
-	static getBetterHTMLTemplate(template, data: any): string {
+	static getBetterHTMLTemplate(template: string, data: any): string {
 		var html: string = this.getCustomHTMLHead(data);
 		html += fs.readFileSync('./views/' + template);
+		html += "</div>";
+		html += "</body>";
+		html += "</html>";
+		return html;
+	}
+
+	static loadScript(scriptName: string, containerName: string, data: any): string {
+		var html: string = this.getCustomHTMLHead(data);
+		html += '<div id="'+containerName+'">Loading Script </div>';
+		html += '<script src="'+scriptName+'"></script>';
 		html += "</div>";
 		html += "</body>";
 		html += "</html>";
@@ -48,7 +58,7 @@ class utils {
 		console.log(' Now Listening at http://localhost:' +  config.getConfig().port); //config.getConfig().port);
 	}
 
-	static debug(message) {
+	static debug(message: string) {
 		if(config.getConfig().debug) {
 			console.info(message);
 		}

@@ -9,21 +9,45 @@
 * And lets me properly learn promises which I should know by now
 */
 
-
-var mongo = require('mongodb').MongoClient;
+var mongo = require('mongodb');
+var mongoClient = mongo.MongoClient;
+var objectID = mongo.ObjectID;
 
 class driver {
 
-	static config = require('./config');
+    static config = require('./config');
 
     static url = driver.config.getConfig().mongo.url; //config.mongo.url;
     static dbname = driver.config.getConfig().mongo.db; //config.mongo.db;
+
+    public static ObjectID() {
+        return objectID;
+    }
+
+    public static findByID = (collName: string, id: string) => new Promise((resolve, reject) => {
+        try {
+            mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
+                if (err) reject(err);
+                var dbo = db.db(driver.dbname);
+                dbo.collection(collName).findOne({ "_id": objectID(id) }, function (err, results) {
+                    if (err) reject(err);
+                    db.close();
+                    resolve(results);
+                });
+            });
+        }
+        catch(err){
+            console.log("\n\nSomeone most likely asked for a bad id. If so, don't worry.\n");
+            console.log(err);
+            reject(err);
+        }
+    });
 
     //examples
     //this.find(collName, search).then((ret) => { res.status(200).json(ret); })
     //this.find(collName, search).then((ret) => { return ret; })
     public static find = (collName: string, search: any) => new Promise((resolve, reject) => {
-        mongo.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
+        mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
             if (err) reject(err);
             var dbo = db.db(driver.dbname);
             dbo.collection(collName).find(search).toArray(function (err, results) {
@@ -35,7 +59,7 @@ class driver {
     });
 
     public static findSortandLimit = (collName: string, search: JSON, sort: JSON, limit: number) => new Promise((resolve, reject) => {
-        mongo.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
+        mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
             if (err) reject(err);
             var dbo = db.db(driver.dbname);
             dbo.collection(collName).find(search).sort(sort).limit(limit).toArray(function (err, results) {
@@ -50,10 +74,10 @@ class driver {
     //this.insert(collName, document).then((ret) => { res.sendStatus(ret); })
     //this.insert(collName, document).then((ret) => { return ret; })
     public static insert = (collName: string, document: JSON) => new Promise((resolve, reject) => {
-        mongo.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
+        mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
             if (err) reject(err);
             var dbo = db.db(driver.dbname);
-            dbo.collection(collName).insertOne(document, function (err,results) {
+            dbo.collection(collName).insertOne(document, function (err, results) {
                 if (err) reject(err);
                 db.close();
                 resolve(results);
@@ -65,10 +89,10 @@ class driver {
     //this.update(collName, search, document).then((ret) => { res.sendStatus(ret); })
     //this.update(collName, search, document).then((ret) => { return ret; })
     static update = (collName: string, search: JSON, document: JSON) => new Promise((resolve, reject) => {
-        mongo.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
+        mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
             if (err) reject(err);
             var dbo = db.db(driver.dbname);
-            dbo.collection(collName).updateOne(search, document, function (err,results) {
+            dbo.collection(collName).updateOne(search, document, function (err, results) {
                 if (err) reject(err);
                 db.close();
                 resolve(results);

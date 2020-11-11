@@ -133,7 +133,7 @@ enableDestroy(server);
 
 function exit() {
 	server.destroy();
-	console.log('\nServer closed.');
+	console.log('\n Server closed.');
 	process.exit(0);
 }
 

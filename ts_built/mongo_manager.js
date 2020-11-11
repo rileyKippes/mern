@@ -7,8 +7,13 @@
 * Also gives me a chance to learn typescript
 * And lets me properly learn promises which I should know by now
 */
-var mongo = require('mongodb').MongoClient;
+var mongo = require('mongodb');
+var mongoClient = mongo.MongoClient;
+var objectID = mongo.ObjectID;
 class driver {
+    static ObjectID() {
+        return objectID;
+    }
     static delete(rcollName, id) {
         //todo
     }
@@ -16,11 +21,31 @@ class driver {
 driver.config = require('./config');
 driver.url = driver.config.getConfig().mongo.url; //config.mongo.url;
 driver.dbname = driver.config.getConfig().mongo.db; //config.mongo.db;
+driver.findByID = (collName, id) => new Promise((resolve, reject) => {
+    try {
+        mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
+            if (err)
+                reject(err);
+            var dbo = db.db(driver.dbname);
+            dbo.collection(collName).findOne({ "_id": objectID(id) }, function (err, results) {
+                if (err)
+                    reject(err);
+                db.close();
+                resolve(results);
+            });
+        });
+    }
+    catch (err) {
+        console.log("\n\nSomeone most likely asked for a bad id. If so, don't worry.\n");
+        console.log(err);
+        reject(err);
+    }
+});
 //examples
 //this.find(collName, search).then((ret) => { res.status(200).json(ret); })
 //this.find(collName, search).then((ret) => { return ret; })
 driver.find = (collName, search) => new Promise((resolve, reject) => {
-    mongo.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
+    mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
         if (err)
             reject(err);
         var dbo = db.db(driver.dbname);
@@ -33,7 +58,7 @@ driver.find = (collName, search) => new Promise((resolve, reject) => {
     });
 });
 driver.findSortandLimit = (collName, search, sort, limit) => new Promise((resolve, reject) => {
-    mongo.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
+    mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
         if (err)
             reject(err);
         var dbo = db.db(driver.dbname);
@@ -49,7 +74,7 @@ driver.findSortandLimit = (collName, search, sort, limit) => new Promise((resolv
 //this.insert(collName, document).then((ret) => { res.sendStatus(ret); })
 //this.insert(collName, document).then((ret) => { return ret; })
 driver.insert = (collName, document) => new Promise((resolve, reject) => {
-    mongo.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
+    mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
         if (err)
             reject(err);
         var dbo = db.db(driver.dbname);
@@ -65,7 +90,7 @@ driver.insert = (collName, document) => new Promise((resolve, reject) => {
 //this.update(collName, search, document).then((ret) => { res.sendStatus(ret); })
 //this.update(collName, search, document).then((ret) => { return ret; })
 driver.update = (collName, search, document) => new Promise((resolve, reject) => {
-    mongo.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
+    mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
         if (err)
             reject(err);
         var dbo = db.db(driver.dbname);

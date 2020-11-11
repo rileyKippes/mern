@@ -38,6 +38,15 @@ class utils {
         html += "</html>";
         return html;
     }
+    static loadScript(scriptName, containerName, data) {
+        var html = this.getCustomHTMLHead(data);
+        html += '<div id="' + containerName + '">Loading Script </div>';
+        html += '<script src="' + scriptName + '"></script>';
+        html += "</div>";
+        html += "</body>";
+        html += "</html>";
+        return html;
+    }
     static listen() {
         console.log(' Now Listening at http://localhost:' + config.getConfig().port); //config.getConfig().port);
     }

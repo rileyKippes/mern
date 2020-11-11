@@ -13,8 +13,4 @@ router.get('/',function (req,res) {
 
 router.use('/privacy', privacy);
 
-router.get('/test',function (req,res) {
-	db.find("comments",{}).then((ret) => { console.log(ret); res.status(200).json(ret); })
-});
-
 module.exports = router;

@@ -16,8 +16,6 @@ class NewStory extends React.Component {
     }
 
     postStory(event) {
-        console.log("postStory();");
-        console.log(this.state);
         fetch('/p/story/newstory', {
             method: 'POST',
             headers: {
@@ -27,15 +25,14 @@ class NewStory extends React.Component {
         }
         ).then((response) => {
             return response.json();
-        })
-            .then((myJson) => {
-                console.log(myJson)
-                this.setState({ ready: true, data: myJson });
-            });
+        }).then((myJson) => {
+            this.setState({ ready: true, data: myJson });
+        });
     }
 
     addTag(event) {
         var value = event.target.value;
+        value = value.toLowerCase();
         if (event.key === 'Enter' && value) {
             if (this.state.tags.find(tag => tag.toLowerCase() === value.toLowerCase())) {
                 event.target.value = "";

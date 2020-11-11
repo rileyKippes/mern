@@ -18,34 +18,22 @@ router.post('/', function (req, res) {
     var pwd = req.body.password;
     var cfm = req.body.confirm;
 
-    console.log(usr + '|' + pwd + '|' + cfm)
-
     //checks
     if (usr == undefined || pwd == undefined || cfm == undefined) {
-        console.log("undefined variables")
         return res.redirect('/u/delete?err=unfilled_form');
     }
     else if (usr !== req.user.username) {
-        console.log("bad username");
         return res.redirect('/u/delete?err=bad_username_or_password');
     }
     else if (cfm !== "Delete") {
-        console.log("bad delete");
         return res.redirect('/u/delete?err=bad_confirm');
     }
     else {
-
         //testing the password is more complex, since we hashed it
         bcrypt.compare(pwd, req.user.password).then((result) => {
             if (!result) {
-                console.log("bad password");
                 return res.redirect('/u/delete?err=bad_username_or_password');
             };
-
-            console.log("Compare Worked");
-            console.log(req.body);
-            console.log(req.user);
-            console.log("Starting deletion");
 
             var id = new mongodb.ObjectID(req.user._id);
             req.logout();
@@ -55,7 +43,6 @@ router.post('/', function (req, res) {
             }).then((db) => {
                 const collection = db.collection(collName);
                 collection.deleteOne({ "_id": id });
-                console.log("Account Deleted");
 
                 return res.redirect('/u/login?delete_success');
             }).catch((err) => {
