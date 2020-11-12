@@ -1,8 +1,11 @@
 MERN Stack Webserver by Riley Harlan Kippes
 
-Features include being able to register, log in, log out, and view your personal account.
+This site is going to be a writing site, allowing users to write and share stories.
+
+Current features include being able to register, log in, log out, and view your personal account.
 You can also chat on the chat box, and send direct messages to each other. There's also an
-engine displacement calculator that uses 1-way data binding.
+engine displacement calculator that uses 1-way data binding. As for stories, you can post and read 
+stories, they are limited to a single page though.
 
 Being pretty was not a concern, function was.
 
@@ -24,7 +27,9 @@ MongoDB, Express, ReactJS, NodeJS
 
 /routes contains individual pages
 
-/src contains jsx source code, to be compiled with babel
+/jsx_src contains jsx source code, to be compiled with babel
+
+/ts_src contains typescript source code, to be compiled with tsc
 
 /views contains html templates
 

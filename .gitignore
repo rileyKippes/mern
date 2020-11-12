@@ -1,5 +1,7 @@
 #ignore compiled React files
 /public/*
+#ignore compiled TypeScript files
+/ts_built/*
 
 /node_modules/*
 access.log
