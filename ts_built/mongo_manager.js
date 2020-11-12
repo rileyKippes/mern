@@ -14,10 +14,8 @@ class driver {
     static ObjectID() {
         return objectID;
     }
-    static delete(rcollName, id) {
-        //todo
-    }
 }
+driver.badIDMessage = "\n\nSomeone most likely asked for a bad id. If so, don't worry.\n";
 driver.config = require('./config');
 driver.url = driver.config.getConfig().mongo.url; //config.mongo.url;
 driver.dbname = driver.config.getConfig().mongo.db; //config.mongo.db;
@@ -36,7 +34,7 @@ driver.findByID = (collName, id) => new Promise((resolve, reject) => {
         });
     }
     catch (err) {
-        console.log("\n\nSomeone most likely asked for a bad id. If so, don't worry.\n");
+        console.log(driver.badIDMessage);
         console.log(err);
         reject(err);
     }
@@ -101,5 +99,45 @@ driver.update = (collName, search, document) => new Promise((resolve, reject) =>
             resolve(results);
         });
     });
+});
+driver.updateByID = (collName, id, document) => new Promise((resolve, reject) => {
+    try {
+        mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
+            if (err)
+                reject(err);
+            var dbo = db.db(driver.dbname);
+            dbo.collection(collName).updateOne({ "_id": objectID(id) }, document, function (err, results) {
+                if (err)
+                    reject(err);
+                db.close();
+                resolve(results);
+            });
+        });
+    }
+    catch (err) {
+        console.log(driver.badIDMessage);
+        console.log(err);
+        reject(err);
+    }
+});
+driver.deleteByID = (collName, id) => new Promise((resolve, reject) => {
+    try {
+        mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err, db) {
+            if (err)
+                reject(err);
+            var dbo = db.db(driver.dbname);
+            dbo.collection(collName).deleteOne({ "_id": objectID(id) }, function (err, results) {
+                if (err)
+                    reject(err);
+                db.close();
+                resolve(results);
+            });
+        });
+    }
+    catch (err) {
+        console.log(driver.badIDMessage);
+        console.log(err);
+        reject(err);
+    }
 });
 module.exports = driver;

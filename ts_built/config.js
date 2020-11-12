@@ -1,9 +1,15 @@
 'use strict';
 var fs = require('fs');
 class configuration {
+    //returns true if successful
     static loadConfig() {
-        this.configuration = JSON.parse(fs.readFileSync('./config.json').toString());
-        return this.configuration;
+        try {
+            this.configuration = JSON.parse(fs.readFileSync('./config.json').toString());
+            return true;
+        }
+        catch (_a) {
+            return false;
+        }
     }
     static getConfig() { return this.configuration; }
 }

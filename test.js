@@ -1,12 +1,14 @@
-var assert = require('chai').assert;
-var utils = require('./ts_src/utils');
-/*
-//test config
-assert.isObject(utils.loadConfig());
-assert.isDefined(utils.getConfig().debug);
-assert.isDefined(utils.getConfig().login);
+var assert = require('chai').assert; //for base 
+var utils = require('./ts_built/utils');
+var config = require('./ts_built/config');
 
-assert.typeOf(utils.getBetterHTMLTemplate('index.html',{title:"test"}),'string','Utils template should provide a string');
-assert.typeOf(utils.generateColor(),'string','Utils generate color should provide a string');
-*/
+assert.isTrue(config.loadConfig());
+assert.isDefined(config.getConfig());
+assert.isObject(config.getConfig());
+assert.isDefined(config.getConfig().mongo);
+
+assert.isString(utils.generateColor());
+assert.isString(utils.getCustomHTMLHead({title:"test"}));
+assert.isString(utils.getBetterHTMLTemplate("index.html",{title:"test"}));
+
 console.log("All tests completed!");
