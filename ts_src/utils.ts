@@ -12,11 +12,12 @@ class utils {
 		var html = '<!DOCTYPE html>'
 		html += '<html lang="en">\n'
 		html += '<head>\n';
-		if (data.title === undefined) {
-			html += "<title> A Website without much content </title>\n";
+		if (data && data.title) {
+			html += '<title> ' + data.title + ' </title>\n';
 		}
 		else {
-			html += '<title> ' + data.title + ' </title>\n';
+			console.error("utils.getCustomHTMLHead() says: Data object is invalid"); //throwing errors is expensive
+			html += "<title> A Website without much content </title>\n";
 		}
 		html += '<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>\n';
 		html += '<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>\n';

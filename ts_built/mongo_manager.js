@@ -11,6 +11,11 @@ var mongo = require('mongodb');
 var mongoClient = mongo.MongoClient;
 var objectID = mongo.ObjectID;
 class driver {
+    //used for testing so that we aren't in the production db
+    static overrideDB(newDB) {
+        this.dbname = newDB;
+        return this.dbname;
+    }
     static ObjectID() {
         return objectID;
     }
