@@ -115,7 +115,7 @@ class driver {
             mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
                 if (err) reject(err);
                 var dbo = db.db(driver.dbname);
-                dbo.collection(collName).updateOne({ "_id": objectID(id) }, document, function (err, results) {
+                dbo.collection(collName).updateOne({ "_id": objectID(id) }, {$set: document} , function (err, results) {
                     if (err) reject(err);
                     db.close();
                     resolve(results);

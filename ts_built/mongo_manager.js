@@ -20,7 +20,7 @@ class driver {
         return objectID;
     }
 }
-driver.badIDMessage = "\n\nSomeone most likely asked for a bad id. If so, don't worry.\n";
+driver.badIDMessage = "\n\nSomeone most likely asked for a bad id.\n";
 driver.config = require('./config');
 driver.url = driver.config.getConfig().mongo.url; //config.mongo.url;
 driver.dbname = driver.config.getConfig().mongo.db; //config.mongo.db;
@@ -111,7 +111,7 @@ driver.updateByID = (collName, id, document) => new Promise((resolve, reject) =>
             if (err)
                 reject(err);
             var dbo = db.db(driver.dbname);
-            dbo.collection(collName).updateOne({ "_id": objectID(id) }, document, function (err, results) {
+            dbo.collection(collName).updateOne({ "_id": objectID(id) }, { $set: document }, function (err, results) {
                 if (err)
                     reject(err);
                 db.close();

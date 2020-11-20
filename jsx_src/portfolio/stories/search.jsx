@@ -175,7 +175,6 @@ class Story extends React.Component {
                             <div className="card-body">
                                 <p className="card-text">
                                     {result.description}
-                                    {result._id}
                                 </p>
                             </div>
                             <div className="card-footer">
