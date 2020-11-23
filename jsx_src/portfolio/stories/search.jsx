@@ -18,7 +18,7 @@ class Story extends React.Component {
         this.state = {
             ready: false,
             storyView: this.storyViews.card,
-            searchView: this.searchViews.simple, 
+            searchView: this.searchViews.simple,
             results: [],
         };
         this.storyViewHandler = this.storyViewHandler.bind(this);
@@ -101,12 +101,12 @@ class Story extends React.Component {
 
     getSearchResults(event) {
         fetch('/p/story/search')
-			.then((response) => {
-				return response.json();
-			})
-			.then((myJson) => {
-				this.setState({ ready: true, results: myJson });
-			});
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                this.setState({ ready: true, results: myJson });
+            });
     }
 
     linkToProfile(event) {
@@ -121,7 +121,7 @@ class Story extends React.Component {
 
     linkToStory(event) {
         //event.target.id is set the ObjectID of the story in question
-        window.location.href = "/p/story/read?"+event.target.id;
+        window.location.href = "/p/story/read?" + event.target.id;
     }
 
     /*
@@ -137,9 +137,6 @@ class Story extends React.Component {
     */
 
     render() {
-        var postStoryMessage = (
-            <a className="btn btn-primary m-1 py-0 col-3" href="/p/story/newstory"> Post a new story! </a>
-        )
 
         var resultList = [];
         var tagsList = [];
@@ -314,7 +311,6 @@ class Story extends React.Component {
         }
         //end building search form
 
-
         //build view switch
         var storyViewSwitch;
         var searchViewSwitch;
@@ -328,7 +324,7 @@ class Story extends React.Component {
         }
 
         storyViewSwitch = (
-            <select className="m-1 col-3" value={this.state.storyView} onChange={this.storyViewHandler}>
+            <select className="m-1 col-1" value={this.state.storyView} onChange={this.storyViewHandler}>
                 {storyViewList}
             </select>
         )
@@ -340,7 +336,7 @@ class Story extends React.Component {
         }
 
         searchViewSwitch = (
-            <select className="m-1 col-3" value={this.state.searchView} onChange={this.searchViewHandler}>
+            <select className="m-1 col-1" value={this.state.searchView} onChange={this.searchViewHandler}>
                 {searchViewList}
             </select>
         )
@@ -348,10 +344,13 @@ class Story extends React.Component {
         return (
             <div id="story_div">
                 {search}
-                <div className="row justify-content-around">
+                <div className="form-row justify-content-around">
                     {searchViewSwitch}
                     {storyViewSwitch}
-                    {postStoryMessage}
+                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/newstory"> Post a new story! </a>
+                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/newpage"> Post a new page! </a>
+                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/updatestory"> Update an existing story! </a>
+                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/updatepage"> Update an existing page! </a>
                 </div>
                 {results}
             </div>
