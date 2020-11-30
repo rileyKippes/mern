@@ -16,7 +16,8 @@ class ReadStory extends React.Component {
     }
 
     getStory() {
-        fetch('/p/story/searchByID?id=' + this.state.id, {
+        console.log('getStory()');
+        fetch('/p/story/searchByID?' + this.state.id, {
             method: 'GET',
             headers: {
                 'Content-Type': "application/json",

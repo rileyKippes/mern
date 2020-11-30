@@ -347,10 +347,10 @@ class Story extends React.Component {
                 <div className="form-row justify-content-around">
                     {searchViewSwitch}
                     {storyViewSwitch}
-                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/newstory"> Post a new story! </a>
-                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/newpage"> Post a new page! </a>
-                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/updatestory"> Update an existing story! </a>
-                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/updatepage"> Update an existing page! </a>
+                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/new/story"> Post a new story! </a>
+                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/new/page"> Post a new page! </a>
+                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/update/story"> Update an existing story! </a>
+                    <a className="btn btn-primary m-1 py-0 col-2 btn-sm" href="/p/story/update/page"> Update an existing page! </a>
                 </div>
                 {results}
             </div>

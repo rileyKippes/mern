@@ -43,11 +43,12 @@ async function testMongo() {
 
     //test update
     var value2 = 25;
-    await db.updateByID('test', id, { _id: id, key: value2 });
+    await db.updateByID('test', id, { key: value2 });
     await db.findByID('test', id).then((ret) => {
         assert.strictEqual(ret.key, value2, "Happy, Value gotten should equal value put in");
         assert.notStrictEqual(ret.key, "not a utc value", "Unhappy, Value gotten should equal value put in");
     });
+
 
     //cleanup
     await db.deleteByID('test', id);

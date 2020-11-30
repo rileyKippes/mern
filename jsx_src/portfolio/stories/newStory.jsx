@@ -16,7 +16,7 @@ class NewStory extends React.Component {
     }
 
     postStory(event) {
-        fetch('/p/story/newstory', {
+        fetch('/p/story/new/story', {
             method: 'POST',
             headers: {
                 'Content-Type': "application/json",

@@ -32,8 +32,6 @@ class driver {
         return objectID;
     }
 
-    
-
     public static findByID = (collName: string, id: string) => new Promise((resolve, reject) => {
         try {
             mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {

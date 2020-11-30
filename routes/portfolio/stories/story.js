@@ -8,6 +8,7 @@ var db = require('../../../ts_built/mongo_manager');
 var ensureLoggedIn = require('connect-ensure-login');
 
 var newStory = require('./newStory');
+var newPage = require('./newPage');
 const { ObjectID } = require('../../../ts_built/mongo_manager');
 
 const helpfulIDMessage = "\n\nIf below error is the 'Error: Argument passed in must be a single String of 12 bytes or a string of 24 hex characters' error, then someone probably requested a bad id\n";
@@ -36,7 +37,10 @@ router.get('/', function (req, res) {
 	}
 */
 
-/* //for the individual pages
+/* 
+//for the individual pages
+//pages are a doubly linked list
+//also includes links to the first to last pages,
 	{
 		_id,
 		storyId,
@@ -49,9 +53,13 @@ router.get('/', function (req, res) {
 	}
 */
 
-router.use('/newStory',
+router.use('/new/story',
 	ensureLoggedIn.ensureLoggedIn('/u/login'),
 	newStory);
+
+router.use('/new/page',
+	ensureLoggedIn.ensureLoggedIn('/u/login'),
+	newPage);
 
 router.get('/search', function (req, res) {
 	db.find('stories').then((ret) => {
@@ -89,6 +97,21 @@ router.get('/read', function (req, res) {
 
 router.get('/read/page', function (req, res) {
 	res.send(utils.loadScript('/portfolio/stories/readPage.js', 'read_page_container', { title: "Read Page" }));
+});
+
+router.get('/update/story', function (req, res) {
+	res.send(utils.loadScript('/portfolio/stories/updateStory.js', 'update_story_container', { title: "Update Story" }));
+});
+
+router.get('/update/page', function (req, res) {
+	res.send(utils.loadScript('/portfolio/stories/updatePage.js', 'update_page_container', { title: "Update Page" }));
+});
+
+router.post('/update/page', function (req, res) {
+	// db.pages.update({_id:ObjectId("000e9808856628263f7e3cfd")},$set:{text:"Updated text"})
+	var newText = { text: req.body.text };
+	db.updateByID('pages', req.body.id, newText);
+	res.status(200);
 });
 
 module.exports = router;
