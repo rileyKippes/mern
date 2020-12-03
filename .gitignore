@@ -2,6 +2,7 @@
 /public/*
 #ignore compiled TypeScript files
 /ts_built/*
+ts_built/
 
 /node_modules/*
 access.log

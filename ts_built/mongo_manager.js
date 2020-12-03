@@ -5,7 +5,6 @@
 * Better maintainability, better testing
 *
 * Also gives me a chance to learn typescript
-* And lets me properly learn promises which I should know by now
 */
 var mongo = require('mongodb');
 var mongoClient = mongo.MongoClient;
@@ -16,6 +15,8 @@ class driver {
         this.dbname = newDB;
         return this.dbname;
     }
+    //can be dangerous in that it won't always use the seed string
+    //but it's better than crashing
     static safeObjectID(seed) {
         if (driver.isID(seed)) {
             return objectID(seed);
@@ -23,6 +24,10 @@ class driver {
         return objectID();
     }
     static isID(value) {
+        //starts at the begining, 
+        //looks for 24 hex characters, 
+        // and expects to reach the end
+        //If anything fails, it returns false
         let hex = /^[0-9A-Fa-f]{24}$/g;
         return hex.test(value);
     }

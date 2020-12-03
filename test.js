@@ -35,6 +35,7 @@ async function testMongo() {
     assert.isFalse(db.isID('a'));
     assert.isFalse(db.isID('000e9808856628263f7e3cfdadsvav'));
     assert.isFalse(db.isID('@#@$@$@000e9808856628263f7e3cfdadsvav'));
+    assert.isFalse(db.isID('$#@e9808856628263f7e3cfd'));
 
     assert.strictEqual('test', db.overrideDB('test'));
     var id = db.safeObjectID();
