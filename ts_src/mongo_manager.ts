@@ -15,21 +15,27 @@ var objectID = mongo.ObjectID;
 
 class driver {
 
-    static badIDMessage : string = "\n\nSomeone most likely asked for a bad id.\n";
-
     static config = require('./config');
 
     static url = driver.config.getConfig().mongo.url; //config.mongo.url;
     static dbname = driver.config.getConfig().mongo.db; //config.mongo.db;
 
     //used for testing so that we aren't in the production db
-    public static overrideDB(newDB: string) : string {
+    public static overrideDB(newDB: string): string {
         this.dbname = newDB;
         return this.dbname;
     }
 
-    public static ObjectID() {
-        return objectID;
+    public static safeObjectID(seed: string) {
+        if(driver.isID(seed)){
+            return objectID(seed);
+        }
+        return objectID();
+    }
+
+    public static isID(value: string): boolean {
+        let hex = /^[0-9A-Fa-f]{24}$/g;
+        return hex.test(value);
     }
 
     public static findByID = (collName: string, id: string) => new Promise((resolve, reject) => {
@@ -37,15 +43,14 @@ class driver {
             mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
                 if (err) reject(err);
                 var dbo = db.db(driver.dbname);
-                dbo.collection(collName).findOne({ "_id": objectID(id) }, function (err, results) {
-                    if (err) reject(err);
+                dbo.collection(collName).findOne({ "_id": driver.safeObjectID(id) }, function (err, results) {
+                    if (err) { reject(err); }
                     db.close();
                     resolve(results);
                 });
             });
         }
         catch (err) {
-            console.log(driver.badIDMessage);
             console.log(err);
             reject(err);
         }
@@ -113,7 +118,7 @@ class driver {
             mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
                 if (err) reject(err);
                 var dbo = db.db(driver.dbname);
-                dbo.collection(collName).updateOne({ "_id": objectID(id) }, {$set: document} , function (err, results) {
+                dbo.collection(collName).updateOne({ "_id": driver.safeObjectID(id) }, { $set: document }, function (err, results) {
                     if (err) reject(err);
                     db.close();
                     resolve(results);
@@ -121,7 +126,6 @@ class driver {
             });
         }
         catch (err) {
-            console.log(driver.badIDMessage);
             console.log(err);
             reject(err);
         }
@@ -132,7 +136,7 @@ class driver {
             mongoClient.connect(driver.url, { useUnifiedTopology: true }, function (err: any, db: any) {
                 if (err) reject(err);
                 var dbo = db.db(driver.dbname);
-                dbo.collection(collName).deleteOne({ "_id": objectID(id) }, function (err, results) {
+                dbo.collection(collName).deleteOne({ "_id": driver.safeObjectID(id) }, function (err, results) {
                     if (err) reject(err);
                     db.close();
                     resolve(results);
@@ -140,7 +144,6 @@ class driver {
             });
         }
         catch (err) {
-            console.log(driver.badIDMessage);
             console.log(err);
             reject(err);
         }

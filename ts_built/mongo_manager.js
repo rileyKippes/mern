@@ -16,11 +16,17 @@ class driver {
         this.dbname = newDB;
         return this.dbname;
     }
-    static ObjectID() {
-        return objectID;
+    static safeObjectID(seed) {
+        if (driver.isID(seed)) {
+            return objectID(seed);
+        }
+        return objectID();
+    }
+    static isID(value) {
+        let hex = /^[0-9A-Fa-f]{24}$/g;
+        return hex.test(value);
     }
 }
-driver.badIDMessage = "\n\nSomeone most likely asked for a bad id.\n";
 driver.config = require('./config');
 driver.url = driver.config.getConfig().mongo.url; //config.mongo.url;
 driver.dbname = driver.config.getConfig().mongo.db; //config.mongo.db;
@@ -30,16 +36,16 @@ driver.findByID = (collName, id) => new Promise((resolve, reject) => {
             if (err)
                 reject(err);
             var dbo = db.db(driver.dbname);
-            dbo.collection(collName).findOne({ "_id": objectID(id) }, function (err, results) {
-                if (err)
+            dbo.collection(collName).findOne({ "_id": driver.safeObjectID(id) }, function (err, results) {
+                if (err) {
                     reject(err);
+                }
                 db.close();
                 resolve(results);
             });
         });
     }
     catch (err) {
-        console.log(driver.badIDMessage);
         console.log(err);
         reject(err);
     }
@@ -111,7 +117,7 @@ driver.updateByID = (collName, id, document) => new Promise((resolve, reject) =>
             if (err)
                 reject(err);
             var dbo = db.db(driver.dbname);
-            dbo.collection(collName).updateOne({ "_id": objectID(id) }, { $set: document }, function (err, results) {
+            dbo.collection(collName).updateOne({ "_id": driver.safeObjectID(id) }, { $set: document }, function (err, results) {
                 if (err)
                     reject(err);
                 db.close();
@@ -120,7 +126,6 @@ driver.updateByID = (collName, id, document) => new Promise((resolve, reject) =>
         });
     }
     catch (err) {
-        console.log(driver.badIDMessage);
         console.log(err);
         reject(err);
     }
@@ -131,7 +136,7 @@ driver.deleteByID = (collName, id) => new Promise((resolve, reject) => {
             if (err)
                 reject(err);
             var dbo = db.db(driver.dbname);
-            dbo.collection(collName).deleteOne({ "_id": objectID(id) }, function (err, results) {
+            dbo.collection(collName).deleteOne({ "_id": driver.safeObjectID(id) }, function (err, results) {
                 if (err)
                     reject(err);
                 db.close();
@@ -140,7 +145,6 @@ driver.deleteByID = (collName, id) => new Promise((resolve, reject) => {
         });
     }
     catch (err) {
-        console.log(driver.badIDMessage);
         console.log(err);
         reject(err);
     }

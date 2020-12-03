@@ -24,25 +24,25 @@ router.post('/',function (req,res) {
     * */
 
     //todo: this
-
+    console.log("post new page");
     var objectid = db.ObjectID();
     var pageID = objectid(Date.now());
+    var currPageID = req.body.story.firstPageID;
     var StoryID = req.body.storyID;
-    console.log(req.body);
-    console.log("/n/n\n\n");
-    console.log(StoryID);
-
-    console.log('updateAllPages');
-    db.findByID('stories', StoryID).then((ret) => {
-        console.log(ret);
-        return ret;
-    }).then((ret) => {
-
-    }).catch((err) => {
+    var newNumPages = 1;
+    if(req.body.story.numPages){
+        newNumPages = req.body.numPages++;
+    }
+    console.log("newNumPages = " + newNumPages);
+    db.updateByID('stories',StoryID,{lastPageID: pageID, numPages: newNumPages})
+    .catch((err) => {
 		console.log(helpfulIDMessage);
 		console.log(err);
-		res.status(500).json({ _id: null, title: "server error" });
-	});
+    });
+
+    if(newNumPages > 1){ 
+
+    }
 
     /*this.findByID('stories', StoryID).then((ret) => { 
         return ret; 

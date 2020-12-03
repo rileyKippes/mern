@@ -30,8 +30,14 @@ function testUtils() {
 async function testMongo() {
     console.log("Beginning Mongo Tests");
     var db = require('./ts_built/mongo_manager');
+
+    assert.isTrue(db.isID('000e9808856628263f7e3cfd'));
+    assert.isFalse(db.isID('a'));
+    assert.isFalse(db.isID('000e9808856628263f7e3cfdadsvav'));
+    assert.isFalse(db.isID('@#@$@$@000e9808856628263f7e3cfdadsvav'));
+
     assert.strictEqual('test', db.overrideDB('test'));
-    var id = db.ObjectID().ObjectID();
+    var id = db.safeObjectID();
     var value = Date.now();
 
     //test insert
@@ -55,6 +61,9 @@ async function testMongo() {
     await db.findByID('test', id).then((ret) => {
         assert.notExists(ret);
     });
+
+
+
     console.log("Mongo tests completed");
 }
 

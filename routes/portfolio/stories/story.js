@@ -62,6 +62,7 @@ router.use('/new/page',
 	newPage);
 
 router.get('/search', function (req, res) {
+	console.log('search');
 	db.find('stories').then((ret) => {
 		res.json(ret);
 	}).catch((err) => {
@@ -72,6 +73,7 @@ router.get('/search', function (req, res) {
 });
 
 router.get('/searchByID', function (req, res) {
+	console.log('search by id');
 	db.findByID('stories', req.query.id).then((ret) => {
 		res.json(ret);
 	}).catch((err) => {
@@ -82,13 +84,20 @@ router.get('/searchByID', function (req, res) {
 });
 
 router.get('/search/page', function (req, res) {
-	db.findByID('pages', req.query.id).then((ret) => {
-		res.json(ret);
-	}).catch((err) => {
+	console.log('search page');
+	console.log(req.query.id);
+	try{
+		db.findByID('pages', req.query.id).then((ret) => {
+			res.json(ret);
+		}).catch((error) => {
+			console.error('bad id');
+		});
+	}
+	catch(error){
 		console.log(helpfulIDMessage);
-		console.log(err);
+		console.log(error);
 		res.status(500).json({ _id: null, title: "server error" });
-	});;
+	};;
 });
 
 router.get('/read', function (req, res) {

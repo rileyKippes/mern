@@ -22,6 +22,7 @@ router.post('/',function (req,res) {
 		author:req.user.username,
 		description: req.body.description,
 		tags: req.body.tags,
+		numPages: 1
 	};
 	var newPage = {
 		_id:newPageID,
