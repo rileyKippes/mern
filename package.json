@@ -41,7 +41,7 @@
     "form-data": "^3.0.0",
     "formdata": "^0.10.4",
     "jquery": "^3.5.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "minimist": ">=0.2.1",
     "mongo": "^0.1.0",
     "morgan": "^1.10.0",
